@@ -180,6 +180,6 @@ export const memberConclusions = [
   },
   {
     member: teamMembers[5],
-    conclusion: "Como único integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. El proyecto de marketplace universitario alcanzó 76% de cobertura de pruebas, 90% de predictibilidad y un Lead Time de 5 días. Trabajar solo permitió agilidad en decisiones pero requirió disciplina estricta en testing automatizado y análisis estático. La deuda técnica se mantuvo controlada (6 ítems). Recomiendo incorporar al menos un integrante más para acelerar el desarrollo de la plataforma de centralización de ventas universitarias.",
+    conclusion: "Como único integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. El proyecto de marketplace universitario alcanzó 76% de cobertura de pruebas, 90% de predictibilidad y un Lead Time de 5 días. Se ejecutaron pruebas de sistema, modulares e integración, identificando un único error en el módulo de filtros. Trabajar solo permitió agilidad en decisiones pero requirió disciplina estricta en testing y revisión de código. La deuda técnica se mantuvo controlada (6 ítems). Recomiendo incorporar al menos un integrante más para acelerar el desarrollo de la plataforma de centralización de ventas universitarias.",
   },
 ];

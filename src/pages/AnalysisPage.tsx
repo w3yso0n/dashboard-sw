@@ -5,7 +5,7 @@ const analyses = [
   {
     icon: Shield,
     question: "¿Cómo aseguran que las entregas cumplen con los estándares de calidad establecidos?",
-    answer: "En Leoneta (5 integrantes) ejecutamos 15 casos de prueba divididos en tres suites: pruebas modulares (MC), de integración (INT) y de sistema (SYS), logrando un 80% de éxito (12 aprobados, 3 fallidos). Las pruebas modulares validaron los flujos individuales (registro, login, búsqueda, filtros, calificación) al 100%. Los fallos se concentraron en integración (falta de estado real del ride y transición a Completado) y sistema (responsive en <400px). La tasa de defectos bajó de 5.8 a 1.9 defectos/KLOC. En Changarritos (1 integrante), la disciplina de testing automatizado y análisis estático redujo la tasa de 4.5 a 1.8 defectos/KLOC.",
+    answer: "En Leoneta (5 integrantes) ejecutamos 15 casos de prueba divididos en tres suites: pruebas modulares (MC), de integración (INT) y de sistema (SYS), logrando un 80% de éxito (12 aprobados, 3 fallidos). Las pruebas modulares validaron los flujos individuales (registro, login, búsqueda, filtros, calificación) al 100%. Los fallos se concentraron en integración (falta de estado real del ride y transición a Completado) y sistema (responsive en <400px). La tasa de defectos bajó de 5.8 a 1.9 defectos/KLOC. En Changarritos (1 integrante), se ejecutaron pruebas de sistema, modulares e integración con un único fallo identificado en el módulo de filtros. La tasa de defectos bajó de 4.5 a 1.8 defectos/KLOC.",
   },
   {
     icon: TrendingUp,
@@ -15,7 +15,7 @@ const analyses = [
   {
     icon: CheckCircle,
     question: "¿Cómo se mide y mejora continuamente la calidad del código?",
-    answer: "Métricas automatizadas: cobertura de pruebas (28% → 79% en Leoneta, 35% → 76% en Changarritos), complejidad ciclomática y deuda técnica. En Leoneta, los code reviews entre 5 integrantes y las tres suites de pruebas (modulares, integración y sistema) fueron fundamentales. Los 3 bugs críticos identificados son: falta de estado global/persistente del ride, no actualización de asientos al aceptar pasajeros, y falta de comunicación entre pantallas. Las soluciones requieren store global (Context/Redux/Zustand) y backend con BD. En Changarritos, el testing exhaustivo compensó la falta de peer review, manteniendo la deuda técnica controlada en 6 ítems.",
+    answer: "Cobertura de pruebas (28% → 79% en Leoneta, 35% → 76% en Changarritos), complejidad ciclomática y deuda técnica. En Leoneta, los code reviews entre 5 integrantes y las tres suites de pruebas (modulares, integración y sistema) fueron fundamentales. Los 3 bugs críticos identificados son: falta de estado global/persistente del ride, no actualización de asientos al aceptar pasajeros, y falta de comunicación entre pantallas. Las soluciones requieren store global (Context/Redux/Zustand) y backend con BD. En Changarritos, las pruebas de sistema, modulares e integración identificaron un error en el filtro; la deuda técnica se mantuvo controlada en 6 ítems.",
   },
   {
     icon: Target,
