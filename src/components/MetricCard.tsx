@@ -46,7 +46,7 @@ export function MetricCard({ metric }: { metric: MetricData }) {
 
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Objetivo: {metric.target} {metric.unit}</span>
-          <span className="font-mono">6 sprints</span>
+          <span className="font-mono">8 sprints</span>
         </div>
       </CardContent>
     </Card>
