@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { metrics, getTrafficStatus, teamMembers, projects } from "@/data/dashboard-data";
 import { TrafficLight } from "@/components/TrafficLight";
-import { ArrowDown, ArrowUp, Users, FolderKanban, Activity, Clock } from "lucide-react";
+import { ArrowDown, ArrowUp, Users, FolderKanban, Activity, Clock, Info } from "lucide-react";
 
 export default function Index() {
   const latestMetrics = metrics.map((m) => {
