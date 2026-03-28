@@ -18,12 +18,12 @@ export function MetricCard({ metric }: { metric: MetricData }) {
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Proyecto Alpha</p>
+            <p className="text-xs text-muted-foreground">Leoneta</p>
             <p className="font-mono text-2xl font-bold">{latestA}<span className="text-xs text-muted-foreground ml-1">{metric.unit}</span></p>
             <TrafficLight status={statusA} />
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Proyecto Beta</p>
+            <p className="text-xs text-muted-foreground">Changarritos</p>
             <p className="font-mono text-2xl font-bold">{latestB}<span className="text-xs text-muted-foreground ml-1">{metric.unit}</span></p>
             <TrafficLight status={statusB} />
           </div>
@@ -38,8 +38,8 @@ export function MetricCard({ metric }: { metric: MetricData }) {
                 contentStyle={{ backgroundColor: "hsl(225, 14%, 11%)", border: "1px solid hsl(225, 12%, 18%)", borderRadius: "8px", fontSize: 12 }}
                 labelStyle={{ color: "hsl(210, 20%, 92%)" }}
               />
-              <Line type="monotone" dataKey="projA" stroke="hsl(142, 60%, 50%)" strokeWidth={2} dot={false} name="Alpha" />
-              <Line type="monotone" dataKey="projB" stroke="hsl(199, 89%, 48%)" strokeWidth={2} dot={false} name="Beta" />
+              <Line type="monotone" dataKey="projA" stroke="hsl(142, 60%, 50%)" strokeWidth={2} dot={false} name="Leoneta" />
+              <Line type="monotone" dataKey="projB" stroke="hsl(199, 89%, 48%)" strokeWidth={2} dot={false} name="Changarritos" />
             </LineChart>
           </ResponsiveContainer>
         </div>
