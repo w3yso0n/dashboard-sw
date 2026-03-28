@@ -26,7 +26,7 @@ export interface MetricData {
   history: { sprint: string; projA: number; projB: number }[];
 }
 
-// Sprints 0-7 for both projects
+// Leoneta: S0–S7 (8 sprints). Changarritos: S0–S8 (9 sprints). Misma serie temporal; S8 solo aplica a Changarritos (projA repetido S7).
 // Leoneta: 5 engineers, Changarritos: 1 engineer
 export const metrics: MetricData[] = [
   {
@@ -41,11 +41,12 @@ export const metrics: MetricData[] = [
       { sprint: "S0", projA: 0, projB: 0 },
       { sprint: "S1", projA: 6.2, projB: 4.8 },
       { sprint: "S2", projA: 5.4, projB: 4.0 },
-      { sprint: "S3", projA: 4.5, projB: 3.5 },
-      { sprint: "S4", projA: 3.6, projB: 2.9 },
-      { sprint: "S5", projA: 4.2, projB: 2.4 },
-      { sprint: "S6", projA: 2.1, projB: 1.9 },
-      { sprint: "S7", projA: 1.5, projB: 1.6 },
+      { sprint: "S3", projA: 4.0, projB: 3.2 },
+      { sprint: "S4", projA: 2.7, projB: 2.1 },
+      { sprint: "S5", projA: 2.7, projB: 2.1 },
+      { sprint: "S6", projA: 2.7, projB: 2.1 },
+      { sprint: "S7", projA: 2.7, projB: 2.1 },
+      { sprint: "S8", projA: 2.7, projB: 2.1 },
     ],
   },
   {
@@ -59,29 +60,31 @@ export const metrics: MetricData[] = [
       { sprint: "S0", projA: 0, projB: 0 },
       { sprint: "S1", projA: 10, projB: 15 },
       { sprint: "S2", projA: 22, projB: 30 },
-      { sprint: "S3", projA: 35, projB: 42 },
-      { sprint: "S4", projA: 48, projB: 55 },
-      { sprint: "S5", projA: 68, projB: 70 },
-      { sprint: "S6", projA: 78, projB: 76 },
-      { sprint: "S7", projA: 82, projB: 80 },
+      { sprint: "S3", projA: 64, projB: 71 },
+      { sprint: "S4", projA: 78, projB: 84 },
+      { sprint: "S5", projA: 78, projB: 84 },
+      { sprint: "S6", projA: 78, projB: 84 },
+      { sprint: "S7", projA: 78, projB: 84 },
+      { sprint: "S8", projA: 78, projB: 84 },
     ],
   },
   {
     name: "CSAT",
     key: "csat",
     unit: "/5",
-    description: "Customer Satisfaction Score — satisfacción de usuarios universitarios (estimado)",
+    description: "Customer Satisfaction Score — pendiente de medición hasta uso real de la app",
     target: 4.5,
     thresholds: { green: 4.0, yellow: 3.0 },
     history: [
       { sprint: "S0", projA: 0, projB: 0 },
       { sprint: "S1", projA: 2.8, projB: 3.0 },
       { sprint: "S2", projA: 3.0, projB: 3.3 },
-      { sprint: "S3", projA: 3.4, projB: 3.5 },
-      { sprint: "S4", projA: 3.8, projB: 3.8 },
-      { sprint: "S5", projA: 4.0, projB: 4.0 },
-      { sprint: "S6", projA: 4.3, projB: 4.3 },
-      { sprint: "S7", projA: 4.5, projB: 4.4 },
+      { sprint: "S3", projA: 3.7, projB: 3.8 },
+      { sprint: "S4", projA: 4.25, projB: 4.35 },
+      { sprint: "S5", projA: 4.25, projB: 4.35 },
+      { sprint: "S6", projA: 4.25, projB: 4.35 },
+      { sprint: "S7", projA: 4.25, projB: 4.35 },
+      { sprint: "S8", projA: 4.25, projB: 4.35 },
     ],
   },
   {
@@ -92,14 +95,15 @@ export const metrics: MetricData[] = [
     target: 30,
     thresholds: { green: 25, yellow: 15 },
     history: [
-      { sprint: "S0", projA: 10, projB: 4 },
-      { sprint: "S1", projA: 20, projB: 5 },
-      { sprint: "S2", projA: 29, projB: 10 },
-      { sprint: "S3", projA: 26, projB: 8 },
-      { sprint: "S4", projA: 31, projB: 6 },
-      { sprint: "S5", projA: 29, projB: 8 },
-      { sprint: "S6", projA: 23, projB: 11 },
-      { sprint: "S7", projA: 18, projB: 5 },
+      { sprint: "S0", projA: 21, projB: 4 },
+      { sprint: "S1", projA: 31, projB: 6 },
+      { sprint: "S2", projA: 38, projB: 8 },
+      { sprint: "S3", projA: 40, projB: 10 },
+      { sprint: "S4", projA: 44, projB: 26 },
+      { sprint: "S5", projA: 44, projB: 26 },
+      { sprint: "S6", projA: 44, projB: 26 },
+      { sprint: "S7", projA: 44, projB: 26 },
+      { sprint: "S8", projA: 44, projB: 26 },
     ],
   },
   {
@@ -113,11 +117,12 @@ export const metrics: MetricData[] = [
       { sprint: "S0", projA: 100, projB: 100 },
       { sprint: "S1", projA: 70, projB: 75 },
       { sprint: "S2", projA: 76, projB: 80 },
-      { sprint: "S3", projA: 82, projB: 82 },
-      { sprint: "S4", projA: 85, projB: 85 },
-      { sprint: "S5", projA: 80, projB: 88 },
-      { sprint: "S6", projA: 92, projB: 90 },
-      { sprint: "S7", projA: 95, projB: 95 },
+      { sprint: "S3", projA: 83, projB: 84 },
+      { sprint: "S4", projA: 87, projB: 89 },
+      { sprint: "S5", projA: 87, projB: 89 },
+      { sprint: "S6", projA: 87, projB: 89 },
+      { sprint: "S7", projA: 87, projB: 89 },
+      { sprint: "S8", projA: 87, projB: 89 },
     ],
   },
   {
@@ -132,11 +137,12 @@ export const metrics: MetricData[] = [
       { sprint: "S0", projA: 3, projB: 2 },
       { sprint: "S1", projA: 18, projB: 10 },
       { sprint: "S2", projA: 14, projB: 8 },
-      { sprint: "S3", projA: 11, projB: 7 },
-      { sprint: "S4", projA: 9, projB: 6 },
-      { sprint: "S5", projA: 8, projB: 5 },
-      { sprint: "S6", projA: 5, projB: 4 },
-      { sprint: "S7", projA: 4, projB: 3 },
+      { sprint: "S3", projA: 9.5, projB: 7 },
+      { sprint: "S4", projA: 6.2, projB: 4.8 },
+      { sprint: "S5", projA: 6.2, projB: 4.8 },
+      { sprint: "S6", projA: 6.2, projB: 4.8 },
+      { sprint: "S7", projA: 6.2, projB: 4.8 },
+      { sprint: "S8", projA: 6.2, projB: 4.8 },
     ],
   },
 ];
@@ -152,52 +158,69 @@ export function getTrafficStatus(metric: MetricData, value: number): TrafficStat
   return "red";
 }
 
+/** Indica si el valor cumple la meta numérica declarada (distinta del “semáforo” por umbrales). */
+export function meetsTarget(metric: MetricData, value: number): boolean {
+  if (metric.invertThreshold) return value <= metric.target;
+  return value >= metric.target;
+}
+
+/** Texto junto al semáforo: distingue “en la meta” de “en zona verde pero sin llegar al objetivo”. */
+export function getTrafficLabel(metric: MetricData, value: number): string {
+  const status = getTrafficStatus(metric, value);
+  if (status === "red") return "Requiere atención";
+  if (status === "yellow") return "A mejorar";
+  if (meetsTarget(metric, value)) return "En la meta";
+  return "En rango; meta pendiente";
+}
+
 // Comparative data — Leoneta: 5 ingenieros, Changarritos: 1 ingeniero
 export const resourceConsumption = [
-  { sprint: "S0", projA: 50, projB: 10, cardsA: 4, cardsB: 2 },
-  { sprint: "S1", projA: 175, projB: 35, cardsA: 5, cardsB: 2 },
-  { sprint: "S2", projA: 200, projB: 42, cardsA: 5, cardsB: 2 },
-  { sprint: "S3", projA: 195, projB: 38, cardsA: 5, cardsB: 2 },
-  { sprint: "S4", projA: 210, projB: 35, cardsA: 6, cardsB: 2 },
-  { sprint: "S5", projA: 220, projB: 40, cardsA: 7, cardsB: 3 },
-  { sprint: "S6", projA: 200, projB: 44, cardsA: 6, cardsB: 3 },
-  { sprint: "S7", projA: 150, projB: 25, cardsA: 5, cardsB: 2 },
+  { sprint: "S0", projA: 44, projB: 14, cardsA: 4, cardsB: 1 },
+  { sprint: "S1", projA: 66, projB: 40, cardsA: 6, cardsB: 2 },
+  { sprint: "S2", projA: 70, projB: 42, cardsA: 6, cardsB: 2 },
+  { sprint: "S3", projA: 68, projB: 38, cardsA: 6, cardsB: 2 },
+  { sprint: "S4", projA: 72, projB: 46, cardsA: 6, cardsB: 2 },
+  { sprint: "S5", projA: 72, projB: 46, cardsA: 6, cardsB: 2 },
+  { sprint: "S6", projA: 74, projB: 48, cardsA: 6, cardsB: 2 },
+  { sprint: "S7", projA: 74, projB: 50, cardsA: 6, cardsB: 2 },
+  { sprint: "S8", projA: 74, projB: 50, cardsA: 6, cardsB: 2 },
 ];
 
 export const technicalDebt = [
   { sprint: "S0", projA: 0, projB: 0 },
-  { sprint: "S1", projA: 8, projB: 3 },
-  { sprint: "S2", projA: 14, projB: 5 },
-  { sprint: "S3", projA: 18, projB: 6 },
-  { sprint: "S4", projA: 22, projB: 7 },
-  { sprint: "S5", projA: 25, projB: 8 },
-  { sprint: "S6", projA: 14, projB: 6 },
-  { sprint: "S7", projA: 8, projB: 4 },
+  { sprint: "S1", projA: 9, projB: 4 },
+  { sprint: "S2", projA: 11, projB: 5 },
+  { sprint: "S3", projA: 7, projB: 6 },
+  { sprint: "S4", projA: 4, projB: 6 },
+  { sprint: "S5", projA: 4, projB: 6 },
+  { sprint: "S6", projA: 3, projB: 5 },
+  { sprint: "S7", projA: 3, projB: 5 },
+  { sprint: "S8", projA: 3, projB: 5 },
 ];
 
 export const memberConclusions = [
   {
     member: teamMembers[0],
-    conclusion: "Como Tech Lead de Leoneta, coordiné la arquitectura de la plataforma de carpooling universitario para CUCEI. A lo largo de 8 sprints (Sprint 0–7), el proyecto pasó de la fase preparatoria hasta el cierre con documentación completa. El backend con NestJS quedó funcional, la integración frontend-backend se completó en Sprint 3, y las correcciones críticas se resolvieron en Sprint 6. La predictibilidad mejoró de 70% a 95% y el Lead Time bajó de 18 a 4 días. Recomiendo continuar con la fase de seguridad avanzada e IA para recomendación de rutas en futuras iteraciones.",
+    conclusion: "Como Tech Lead de Leoneta, coordiné la arquitectura del carpooling para CUCEI. Llevamos cerrados los Sprints 0–3 con un flujo general funcional (login, búsqueda, publicación conectados al backend). Estamos en Sprint 4: faltan detalles de UX, notificaciones y flujos avanzados; las pruebas formales (Sprint 5), correcciones y cierre (Sprints 6–7) están por delante. La predictibilidad ya está en rango saludable (~87–89%) y el Lead Time se acerca al objetivo; priorizamos terminar Sprint 4 antes de comprometer métricas de cierre.",
   },
   {
     member: teamMembers[1],
-    conclusion: "En Leoneta desarrollé el frontend y lideré la integración con el backend en Sprint 3, sustituyendo todos los mocks por llamadas reales a la API. Los flujos de login, búsqueda, publicación y perfil quedaron conectados al backend. En Sprint 6 corregí el bug responsive del campo Destino en pantallas <400px. Las pruebas modulares de mis componentes pasaron al 100% (5/5). Sugiero seguir mejorando la experiencia móvil y agregar animaciones de transición entre pantallas.",
+    conclusion: "Integré el frontend con la API en Sprint 3 y el flujo básico ya recorre login → buscar → solicitar. En Sprint 4 sigo con sincronización entre pantallas, feedback visual y notificaciones; aún no hay pulido completo ni suite de pruebas modulares al 100%. Pendientes: transiciones, responsive fino y validación con QA en el siguiente sprint.",
   },
   {
     member: teamMembers[2],
-    conclusion: "El backend de Leoneta se desarrolló entre Sprint 1 y Sprint 2, logrando una API REST completa con NestJS y PostgreSQL. Implementé el CRUD de usuarios y rides, el motor de coincidencias, los estados del ride y la autenticación institucional. En Sprint 6 corregí los bugs críticos de transición de estado a Completado y actualización de asientos. La deuda técnica se redujo de 25 a 8 ítems entre Sprint 5 y Sprint 7.",
+    conclusion: "El backend (Sprints 1–2) cubre API REST, matching, estados del ride y auth institucional. El producto no está al 100%: en Sprint 4 seguimos con calificaciones, validación de conductores y reportes; bugs conocidos (alertas, transición a Completado, asientos) están planeados para corregir en Sprint 6 tras las pruebas de Sprint 5.",
   },
   {
     member: teamMembers[3],
-    conclusion: "Ejecuté 15 casos de prueba en Leoneta durante Sprint 5: 5 modulares (MC), 5 de integración (INT) y 5 de sistema (SYS). Resultado: 12 aprobados y 3 fallidos (80% de éxito). Los fallos fueron: INT_Solicitud_Aceptar_Notificacion (falta alerta de aceptación), INT_Viaje_Calificacion (sin transición a Completado) y SYS_RESPONSIVE (desbordamiento <400px). Los 3 bugs se corrigieron en Sprint 6. En Sprint 7 realicé la validación final end-to-end y elaboré el Test Report.",
+    conclusion: "Aún no ejecutamos la batería completa de pruebas de Sprint 5: las suites MC, INT y SYS y la validación end-to-end quedan pendientes. En el backlog están los casos de integración (solicitud/notificaciones, viaje hasta Completado) y el Test Report final para Sprint 7. Mi foco ahora es preparar criterios y datos de prueba alineados con lo que termine Sprint 4.",
   },
   {
     member: teamMembers[4],
-    conclusion: "En Leoneta trabajé en el backend del motor de coincidencias (Sprint 2), la sincronización de flujos en tiempo real (Sprint 4) y la corrección del bug de notificaciones en Sprint 6. La velocidad del equipo alcanzó su pico de 31 pts en Sprint 4, bajando naturalmente en Sprint 7 (cierre). La cobertura de pruebas subió de 0% a 82%. Propongo para el futuro implementar WebSockets para notificaciones en tiempo real y mejorar el matching con factores de reputación.",
+    conclusion: "Participé en el motor de coincidencias (Sprint 2) y ahora en Sprint 4 en sincronización de estados y flujos de solicitud. Notificaciones en tiempo real y refinamiento del matching siguen abiertos; la cobertura de pruebas subió de forma sostenida y roza la meta de cierre; consolidaremos el salto final con la batería de QA de Sprint 5.",
   },
   {
     member: teamMembers[5],
-    conclusion: "Como único integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. En 8 sprints el marketplace universitario alcanzó 80% de cobertura de pruebas, 95% de predictibilidad y un Lead Time de 3 días. Se identificó un único error en el módulo de filtros de búsqueda (Sprint 5), que fue corregido en el mismo sprint. Trabajar solo permitió agilidad en decisiones pero requirió disciplina estricta. La deuda técnica se mantuvo controlada (4 ítems al cierre).",
+    conclusion: "En Changarritos (plan 9 sprints, 0–8) cerré S0 con Test Plan y KPIs; S1 autenticación; S2 CRUD de productos; S3 catálogo con filtros, buscador y detalle. Estoy en Sprint 4: WhatsApp, chatbot IA y recomendaciones, con QA de respuestas y errores de IA. Pendientes S5 (notificaciones y favoritos), S6 (dashboard y batería de pruebas), S7 (bugs y rendimiento) y S8 (Test Report, documentación y validación final).",
   },
 ];

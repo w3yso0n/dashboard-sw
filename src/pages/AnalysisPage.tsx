@@ -5,22 +5,22 @@ const analyses = [
   {
     icon: Shield,
     question: "¿Cómo aseguran que las entregas cumplen con los estándares de calidad establecidos?",
-    answer: "En Leoneta (5 integrantes) ejecutamos 15 casos de prueba divididos en tres suites: pruebas modulares (MC), de integración (INT) y de sistema (SYS), logrando un 80% de éxito (12 aprobados, 3 fallidos). Las pruebas modulares validaron los flujos individuales (registro, login, búsqueda, filtros, calificación) al 100%. Los fallos se concentraron en integración (falta de estado real del ride y transición a Completado) y sistema (responsive en <400px). La tasa de defectos bajó de 5.8 a 1.9 defectos/KLOC. En Changarritos (1 integrante), se ejecutaron pruebas de sistema, modulares e integración con un único fallo identificado en el módulo de filtros. La tasa de defectos bajó de 4.5 a 1.8 defectos/KLOC.",
+    answer: "Estamos en Sprint 4: el flujo general de Leoneta (login, búsqueda, publicación contra API real) ya está probado de forma informal en desarrollo, pero las suites formales MC, INT y SYS están planificadas para Sprint 5 y la validación end-to-end y Test Report para Sprint 7 — aún no ejecutadas. En Changarritos (plan de 9 sprints hasta S8), S0–S3 ya cubren Test Plan, autenticación, CRUD de productos y catálogo con integración; en Sprint 4 el foco es WhatsApp, chatbot IA y recomendaciones, con QA de respuestas y errores de IA. El cierre formal de Changarritos va en Sprint 8.",
   },
   {
     icon: TrendingUp,
     question: "¿Qué tan estable y predecible es el proceso de desarrollo?",
-    answer: "La predictibilidad mejoró de 58% a 92% en Leoneta y de 65% a 90% en Changarritos. Leoneta alcanza ~35% de avance global: el frontend demo está al 65–75% con 6 de 12 módulos implementados, pero el backend (API REST/NestJS + BD) está al 0–10%. De 10 objetivos, solo 2 están completos y 6 sin iniciar. La coordinación entre 5 integrantes especializados por módulo fue clave para estabilizar la velocidad a partir del Sprint 4. Changarritos, al ser una sola persona, tuvo predictibilidad naturalmente alta desde el inicio sin dependencias entre integrantes.",
+    answer: "La predictibilidad subió desde Sprints 1–3 y en Sprint 4 se mantiene en torno a ~87–89%, por encima del umbral que consideramos saludable. Aún hay historias de UX, notificaciones y confianza en curso, pero el ritmo de entrega es estable. Leoneta tiene backend y núcleo API entregados en Sprints 1–2 e integración base en Sprint 3; lo que falta son detalles de producto, QA formal y hardening. Changarritos, con un solo integrante, lleva S0–S3 cerrados y en Sprint 4 integra contacto WhatsApp e IA; notificaciones, métricas, correcciones y cierre están repartidos en S5–S8.",
   },
   {
     icon: CheckCircle,
     question: "¿Cómo se mide y mejora continuamente la calidad del código?",
-    answer: "Cobertura de pruebas (28% → 79% en Leoneta, 35% → 76% en Changarritos), complejidad ciclomática y deuda técnica. En Leoneta, los code reviews entre 5 integrantes y las tres suites de pruebas (modulares, integración y sistema) fueron fundamentales. Los 3 bugs críticos identificados son: falta de estado global/persistente del ride, no actualización de asientos al aceptar pasajeros, y falta de comunicación entre pantallas. Las soluciones requieren store global (Context/Redux/Zustand) y backend con BD. En Changarritos, las pruebas de sistema, modulares e integración identificaron un error en el filtro; la deuda técnica se mantuvo controlada en 6 ítems.",
+    answer: "Seguimos cobertura de pruebas, deuda técnica y revisiones entre pares; los valores actuales (~78% Leoneta y ~84% Changarritos en cobertura) ya están en línea con la meta de cierre (80%) a nivel conjunto, y seguimos subiendo casos críticos antes de Sprint 5. La deuda técnica bajó respecto a Sprints anteriores y la rematamos en Sprint 6 tras la batería de pruebas. Prioridad inmediata: cerrar Sprint 4 (sincronización de pantallas, flujos de solicitud, pulido UX) antes de congelar criterios de aceptación para QA.",
   },
   {
     icon: Target,
     question: "Si pudieran mejorar sólo un métrico, ¿cuál sería y por qué?",
-    answer: "Lead Time. Leoneta lo redujo de 19 a 5 días y Changarritos de 12 a 5 días. Para Leoneta, un Lead Time más corto permitiría iterar más rápido sobre las fases pendientes: Fase 2 (Backend + BD NestJS), Fase 3 (Seguridad/Verificación e Incentivos) y Fase 4 (IA + analítica). Actualmente el 50% de funcionalidades están bloqueadas por falta de backend, por lo que reducir el Lead Time a 3 días con feature flags y trunk-based development aceleraría el desbloqueo. Es un métrico multiplicador: mejorarlo impulsa CSAT y velocidad simultáneamente, permitiendo obtener feedback real de la comunidad CUCEI más temprano.",
+    answer: "Lead Time: mantenerlo bajo (~6 días Leoneta, ~5 Changarritos en el último punto registrado) permite terminar Sprint 4 y enchufar enseguida el ciclo de pruebas y correcciones. Afinar aún más con entregas pequeñas y definición clara de “listo” aceleraría la validación formal: Leoneta hacia Sprints 6–7 y Changarritos hacia S7–S8 (cierre).",
   },
 ];
 
@@ -28,8 +28,10 @@ export default function AnalysisPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Análisis de Cierre</h1>
-        <p className="text-sm text-muted-foreground">Respuestas basadas en los métricas de Leoneta (5 integrantes) y Changarritos (1 integrante)</p>
+        <h1 className="text-2xl font-bold">Análisis del proyecto</h1>
+        <p className="text-sm text-muted-foreground">
+          Estado al Sprint 4 en curso — Leoneta (5 integrantes, plan S0–S7) y Changarritos (1 integrante, plan S0–S8). QA, correcciones y cierre siguen planificados en sprints posteriores.
+        </p>
       </div>
       <div className="grid gap-4">
         {analyses.map((a, i) => (

@@ -10,9 +10,9 @@ const items = [
   { title: "Resumen", url: "/", icon: LayoutDashboard },
   { title: "Métricas", url: "/metrics", icon: BarChart3 },
   { title: "Comparativo", url: "/comparative", icon: GitCompare },
-  { title: "Análisis de Cierre", url: "/analysis", icon: FileText },
+  { title: "Análisis del proyecto", url: "/analysis", icon: FileText },
   { title: "Backlog", url: "/backlog", icon: ListTodo },
-  { title: "Conclusiones", url: "/conclusions", icon: Users },
+  { title: "Estado del equipo", url: "/conclusions", icon: Users },
 ];
 
 export function AppSidebar() {

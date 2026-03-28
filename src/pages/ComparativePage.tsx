@@ -9,24 +9,29 @@ const chartStyle = {
   fontSize: 12,
 };
 
+/** Solo S0–S4: sprint actual; S5–S7 aún no aportan datos reales de avance. */
+const SPRINT_HISTORY_UP_TO = 5;
+
 export default function ComparativePage() {
   const velocityMetric = metrics.find((m) => m.key === "velocity")!;
+  const velocityHistory = velocityMetric.history.slice(0, SPRINT_HISTORY_UP_TO);
+  const consumptionSlice = resourceConsumption.slice(0, SPRINT_HISTORY_UP_TO);
+  const debtSlice = technicalDebt.slice(0, SPRINT_HISTORY_UP_TO);
 
   let cumA = 0, cumB = 0;
-  const progressData = velocityMetric.history.map((h) => {
+  const progressData = velocityHistory.map((h) => {
     cumA += h.projA;
     cumB += h.projB;
     return { sprint: h.sprint, Leoneta: cumA, Changarritos: cumB };
   });
 
-  const efficiencyData = resourceConsumption.map((r) => ({
+  const efficiencyData = consumptionSlice.map((r) => ({
     sprint: r.sprint,
     Leoneta: +(r.projA / r.cardsA).toFixed(1),
     Changarritos: +(r.projB / r.cardsB).toFixed(1),
   }));
 
-  // Velocity per person
-  const velocityPerPerson = velocityMetric.history.map((h) => ({
+  const velocityPerPerson = velocityHistory.map((h) => ({
     sprint: h.sprint,
     "Leoneta (por persona)": +(h.projA / 5).toFixed(1),
     "Changarritos (por persona)": +(h.projB / 1).toFixed(1),
@@ -36,13 +41,21 @@ export default function ComparativePage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Análisis Comparativo</h1>
-        <p className="text-sm text-muted-foreground">Leoneta (5 integrantes) vs Changarritos (1 integrante)</p>
+        <p className="text-sm text-muted-foreground">
+          Leoneta (5 integrantes) vs Changarritos (1 integrante).{" "}
+          <span className="text-foreground font-medium">Sprint 4 en curso</span>
+          {" — "}datos hasta <span className="font-mono">S4</span>. Leoneta muestra{" "}
+          <span className="text-foreground font-medium">throughput acumulado por encima de la meta</span>,{" "}
+          <span className="text-foreground font-medium">mejor eficiencia en horas por tarjeta</span> (equipo paralelizado) y{" "}
+          <span className="text-foreground font-medium">deuda en descenso</span> tras picos iniciales. Changarritos mantiene buen ritmo
+          individual; el cierre del otro proyecto va hasta <span className="font-mono">S8</span>.
+        </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Comparación de Avance (Story Points Acumulados)</CardTitle>
+            <CardTitle className="text-sm">Comparación de Avance — pts acumulados (hasta Sprint 4)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -61,7 +74,7 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Velocidad por Persona (pts/sprint/persona)</CardTitle>
+            <CardTitle className="text-sm">Velocidad por Persona — pts/sprint/persona (S0–S4)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -80,7 +93,7 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Consumo de Recursos (Horas Ingeniero / Tarjeta)</CardTitle>
+            <CardTitle className="text-sm">Consumo de Recursos — h/ingeniero por tarjeta (S0–S4)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -99,11 +112,11 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Deuda Técnica (Ítems Pendientes)</CardTitle>
+            <CardTitle className="text-sm">Deuda Técnica — ítems pendientes (S0–S4)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={technicalDebt}>
+              <LineChart data={debtSlice}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(225, 12%, 18%)" />
                 <XAxis dataKey="sprint" tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
                 <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />

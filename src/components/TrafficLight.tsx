@@ -7,16 +7,33 @@ const statusColors: Record<TrafficStatus, string> = {
 };
 
 const statusLabels: Record<TrafficStatus, string> = {
-  green: "En objetivo",
-  yellow: "Precaución",
-  red: "Crítico",
+  green: "En la meta",
+  yellow: "A mejorar",
+  red: "Requiere atención",
 };
 
-export function TrafficLight({ status }: { status: TrafficStatus }) {
+export function TrafficLight({
+  status,
+  label,
+  neutral,
+}: {
+  status: TrafficStatus;
+  label?: string;
+  /** Sin semáforo de color: indicador aún no medible o no aplica. */
+  neutral?: boolean;
+}) {
+  if (neutral) {
+    return (
+      <div className="flex items-center gap-2">
+        <div className="h-3.5 w-3.5 rounded-full bg-muted-foreground/35" />
+        <span className="text-xs text-muted-foreground">{label ?? "Sin medición"}</span>
+      </div>
+    );
+  }
   return (
     <div className="flex items-center gap-2">
       <div className={`h-3.5 w-3.5 rounded-full ${statusColors[status]}`} />
-      <span className="text-xs text-muted-foreground">{statusLabels[status]}</span>
+      <span className="text-xs text-muted-foreground">{label ?? statusLabels[status]}</span>
     </div>
   );
 }
