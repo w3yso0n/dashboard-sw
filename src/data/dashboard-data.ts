@@ -48,7 +48,7 @@ export const metrics: MetricData[] = [
     name: "Cobertura de Pruebas",
     key: "test-coverage",
     unit: "%",
-    description: "Porcentaje de código cubierto por pruebas automatizadas",
+    description: "Porcentaje de código cubierto por pruebas",
     target: 80,
     thresholds: { green: 75, yellow: 50 },
     history: [
