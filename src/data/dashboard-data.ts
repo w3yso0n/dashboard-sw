@@ -1,10 +1,10 @@
 // Team members
 export const teamMembers = [
-  { id: 1, name: "Luis Avila", role: "Tech Lead", projects: ["Leoneta"] },
-  { id: 2, name: "Alberto Vera", role: "Frontend Dev", projects: ["Leoneta"] },
-  { id: 3, name: "Franco Aldrete", role: "Backend Dev", projects: ["Leoneta"] },
-  { id: 4, name: "Braulio Jimenez", role: "QA Engineer", projects: ["Leoneta"] },
-  { id: 5, name: "Emmanuel Woo", role: "Full Stack Dev", projects: ["Leoneta"] },
+  { id: 1, name: "Luis Felipe Avila Leyva", role: "Tech Lead", projects: ["Leoneta"] },
+  { id: 2, name: "Alberto Vera Ruiz", role: "Frontend Dev", projects: ["Leoneta"] },
+  { id: 3, name: "Franco Alexandro Aldrete de la Mora", role: "Backend Dev", projects: ["Leoneta"] },
+  { id: 4, name: "Braulio Jimenez Chavez", role: "QA Engineer", projects: ["Leoneta"] },
+  { id: 5, name: "Emanuel Cavazos Woo", role: "Full Stack Dev", projects: ["Leoneta"] },
   { id: 6, name: "Faed Velasco", role: "Full Stack Dev", projects: ["Changarritos"] },
 ];
 
@@ -160,26 +160,26 @@ export const technicalDebt = [
 export const memberConclusions = [
   {
     member: teamMembers[0],
-    conclusion: "Como Tech Lead de Leoneta, la arquitectura del motor de coincidencias conductor-pasajero y la autenticación institucional fueron los retos principales. Con un equipo de 5 personas, logramos reducir la tasa de defectos un 67% y alcanzar 92% de predictibilidad. La coordinación del equipo fue clave para mantener la velocidad en 43 pts/sprint. Recomiendo invertir en pruebas de integración end-to-end del flujo de emparejamiento.",
+    conclusion: "Como Tech Lead de Leoneta, coordiné la arquitectura de la plataforma de carpooling universitario para CUCEI. El proyecto alcanza ~35% de avance global: el frontend demo está al 65–75% con flujos funcionales (registro, login, búsqueda, publicación de viajes, perfil y calificaciones) operando con datos mock. De 10 objetivos, 2 están completos y 6 sin iniciar. La prioridad inmediata es la implementación de API/BD con NestJS y el flujo real de solicitud/aceptación de rides. En pruebas ejecutamos 15 casos (sistema, modulares e integración) con 80% de éxito (12 aprobados, 3 fallidos). Recomiendo priorizar el backend y la gestión de estados del ride para desbloquear el 50% de funcionalidades pendientes.",
   },
   {
     member: teamMembers[1],
-    conclusion: "En Leoneta, el desarrollo frontend del flujo de publicación y búsqueda de viajes con mapas, horarios y sistema de calificaciones requirió un UX cuidadoso. La adopción de un design system aceleró la velocidad del equipo un 115% desde el Sprint 1. Sugiero reducir la deuda técnica en los componentes de mapa y formularios de viaje para facilitar futuras integraciones.",
+    conclusion: "En Leoneta desarrollé el frontend de los flujos principales: registro de usuario, búsqueda de viajes con filtros, publicación de viajes, perfil y sistema de calificaciones/valoraciones. Todos operan con datos mock en la demo. Las pruebas modulares (MC) de estos componentes pasaron al 100% (5/5 aprobados). El caso SYS_RESPONSIVE_013 falló porque en pantallas <400px el campo 'Destino' se desborda. Sugiero ajustar estilos responsive y preparar la integración frontend-backend sustituyendo mocks por llamadas reales con manejo de errores.",
   },
   {
     member: teamMembers[2],
-    conclusion: "El backend de Leoneta fue desafiante: motor de coincidencias de rutas, sistema de calificaciones, comunicación segura sin exponer datos personales y validación de credenciales institucionales. Los pipelines CI/CD redujeron el Lead Time de 19 a 5 días. El siguiente paso es implementar monitoreo en tiempo real y optimizar las queries del motor de emparejamiento.",
+    conclusion: "El backend de Leoneta está en etapa temprana (0–10%). Mi enfoque ha sido el diseño del esquema de base de datos (usuarios, viajes, solicitudes, calificaciones, reportes, auditoría) y la arquitectura de la API REST con NestJS. Los bugs principales identificados son: falta de estado global/persistente del ride, no se actualizan asientos al aceptar pasajeros, y no hay comunicación entre pantallas. Las pruebas de integración revelaron 2 de los 3 fallos (INT_Solicitud_Aceptar y INT_Viaje_Calificacion) por ausencia de backend real. El siguiente paso es implementar endpoints para login institucional, viajes, solicitudes y estados del ride.",
   },
   {
     member: teamMembers[3],
-    conclusion: "La cobertura de pruebas en Leoneta creció de 28% a 79%, enfocándonos en el flujo de emparejamiento de rutas y validación de credenciales institucionales. Los tests automatizados detectaron el 75% de defectos antes de producción. Sugiero agregar pruebas de rendimiento para el motor de coincidencias y tests de seguridad para la autenticación.",
+    conclusion: "Ejecuté 15 casos de prueba en Leoneta: 5 pruebas modulares (MC), 5 de integración (INT) y 5 de sistema (SYS). Resultado: 12 aprobados y 3 fallidos (80% de éxito). Los fallos fueron: INT_Solicitud_Aceptar_Notificacion_04 (falta estado del ride aceptado y alertas), INT_Viaje_Calificacion_05 (no existe transición a Completado ni flujo real de calificar), y SYS_RESPONSIVE_013 (desbordamiento del campo Destino en <400px). Los bugs críticos requieren un store global (Context/Redux/Zustand) y backend con BD para gestionar estados reales de los viajes.",
   },
   {
     member: teamMembers[4],
-    conclusion: "En Leoneta, la predictibilidad mejoró de 58% a 92%, reflejando mejor planificación del MVP: registro institucional, perfiles, publicación de viajes y motor de coincidencias. Trabajar en un equipo de 5 permitió especialización por módulo. Propongo sesiones de refinamiento más frecuentes y documentación técnica para las futuras fases del proyecto.",
+    conclusion: "En Leoneta, la predictibilidad mejoró de 58% a 92%, reflejando mejor planificación del MVP. De 12 módulos en el backlog, 6 están implementados en demo (50%) y 6 bloqueados por falta de backend/BD. Trabajar en un equipo de 5 permitió especialización por módulo. Las fases pendientes incluyen: Fase 2 (Backend + BD NestJS, 0–10%), Fase 3 (Seguridad/Verificación + Incentivos, 0–5%) y Fase 4 (IA + analítica, 0%). Propongo priorizar la conexión frontend-backend y definir reglas de verificación institucional (correo UDG, comprobante de pertenencia).",
   },
   {
     member: teamMembers[5],
-    conclusion: "Como única integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. El proyecto alcanzó 76% de cobertura de pruebas, 90% de predictibilidad y un Lead Time de 5 días. Trabajar sola permitió agilidad en decisiones pero requirió disciplina estricta. La deuda técnica se mantuvo controlada (6 ítems). Recomiendo incorporar al menos un integrante más para acelerar el desarrollo del marketplace universitario.",
+    conclusion: "Como único integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. El proyecto de marketplace universitario alcanzó 76% de cobertura de pruebas, 90% de predictibilidad y un Lead Time de 5 días. Trabajar solo permitió agilidad en decisiones pero requirió disciplina estricta en testing automatizado y análisis estático. La deuda técnica se mantuvo controlada (6 ítems). Recomiendo incorporar al menos un integrante más para acelerar el desarrollo de la plataforma de centralización de ventas universitarias.",
   },
 ];
