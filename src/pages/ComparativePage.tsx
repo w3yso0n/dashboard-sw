@@ -25,11 +25,18 @@ export default function ComparativePage() {
     Changarritos: +(r.projB / r.cardsB).toFixed(1),
   }));
 
+  // Velocity per person
+  const velocityPerPerson = velocityMetric.history.map((h) => ({
+    sprint: h.sprint,
+    "Leoneta (por persona)": +(h.projA / 5).toFixed(1),
+    "Changarritos (por persona)": +(h.projB / 1).toFixed(1),
+  }));
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Análisis Comparativo</h1>
-        <p className="text-sm text-muted-foreground">Comparación de rendimiento entre Leoneta y Changarritos</p>
+        <p className="text-sm text-muted-foreground">Leoneta (5 integrantes) vs Changarritos (1 integrante)</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -54,6 +61,25 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
+            <CardTitle className="text-sm">Velocidad por Persona (pts/sprint/persona)</CardTitle>
+          </CardHeader>
+          <CardContent className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={velocityPerPerson}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(225, 12%, 18%)" />
+                <XAxis dataKey="sprint" tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
+                <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
+                <Tooltip contentStyle={chartStyle} />
+                <Legend />
+                <Bar dataKey="Leoneta (por persona)" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Changarritos (por persona)" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border bg-card">
+          <CardHeader>
             <CardTitle className="text-sm">Consumo de Recursos (Horas Ingeniero / Tarjeta)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
@@ -66,25 +92,6 @@ export default function ComparativePage() {
                 <Legend />
                 <Bar dataKey="Leoneta" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="Changarritos" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border bg-card">
-          <CardHeader>
-            <CardTitle className="text-sm">Velocidad Media de los Equipos</CardTitle>
-          </CardHeader>
-          <CardContent className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={velocityMetric.history}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(225, 12%, 18%)" />
-                <XAxis dataKey="sprint" tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
-                <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
-                <Tooltip contentStyle={chartStyle} />
-                <Legend />
-                <Bar dataKey="projA" name="Leoneta" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="projB" name="Changarritos" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
