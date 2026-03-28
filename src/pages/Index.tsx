@@ -62,6 +62,7 @@ export default function Index() {
         </CardContent>
       </Card>
 
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {latestMetrics.map((m) => (
           <Card key={m.key} className="border-border bg-card">
             <CardContent className="pt-4 space-y-2">
