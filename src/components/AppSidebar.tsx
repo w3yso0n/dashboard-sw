@@ -1,4 +1,4 @@
-import { BarChart3, GitCompare, FileText, Users, LayoutDashboard } from "lucide-react";
+import { BarChart3, GitCompare, FileText, Users, LayoutDashboard, ListTodo } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ const items = [
   { title: "Métricas", url: "/metrics", icon: BarChart3 },
   { title: "Comparativo", url: "/comparative", icon: GitCompare },
   { title: "Análisis de Cierre", url: "/analysis", icon: FileText },
+  { title: "Backlog", url: "/backlog", icon: ListTodo },
   { title: "Conclusiones", url: "/conclusions", icon: Users },
 ];
 
