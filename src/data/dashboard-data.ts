@@ -26,6 +26,8 @@ export interface MetricData {
   history: { sprint: string; projA: number; projB: number }[];
 }
 
+// Sprints 0-7 for both projects
+// Leoneta: 5 engineers, Changarritos: 1 engineer
 export const metrics: MetricData[] = [
   {
     name: "Tasa de Defectos",
@@ -36,12 +38,14 @@ export const metrics: MetricData[] = [
     thresholds: { green: 3, yellow: 5 },
     invertThreshold: true,
     history: [
-      { sprint: "Sprint 1", projA: 5.8, projB: 4.5 },
-      { sprint: "Sprint 2", projA: 4.9, projB: 3.8 },
-      { sprint: "Sprint 3", projA: 4.1, projB: 3.2 },
-      { sprint: "Sprint 4", projA: 3.3, projB: 2.7 },
-      { sprint: "Sprint 5", projA: 2.6, projB: 2.2 },
-      { sprint: "Sprint 6", projA: 1.9, projB: 1.8 },
+      { sprint: "S0", projA: 0, projB: 0 },
+      { sprint: "S1", projA: 6.2, projB: 4.8 },
+      { sprint: "S2", projA: 5.4, projB: 4.0 },
+      { sprint: "S3", projA: 4.5, projB: 3.5 },
+      { sprint: "S4", projA: 3.6, projB: 2.9 },
+      { sprint: "S5", projA: 4.2, projB: 2.4 },
+      { sprint: "S6", projA: 2.1, projB: 1.9 },
+      { sprint: "S7", projA: 1.5, projB: 1.6 },
     ],
   },
   {
@@ -52,28 +56,32 @@ export const metrics: MetricData[] = [
     target: 80,
     thresholds: { green: 75, yellow: 50 },
     history: [
-      { sprint: "Sprint 1", projA: 28, projB: 35 },
-      { sprint: "Sprint 2", projA: 40, projB: 45 },
-      { sprint: "Sprint 3", projA: 52, projB: 54 },
-      { sprint: "Sprint 4", projA: 63, projB: 62 },
-      { sprint: "Sprint 5", projA: 72, projB: 70 },
-      { sprint: "Sprint 6", projA: 79, projB: 76 },
+      { sprint: "S0", projA: 0, projB: 0 },
+      { sprint: "S1", projA: 10, projB: 15 },
+      { sprint: "S2", projA: 22, projB: 30 },
+      { sprint: "S3", projA: 35, projB: 42 },
+      { sprint: "S4", projA: 48, projB: 55 },
+      { sprint: "S5", projA: 68, projB: 70 },
+      { sprint: "S6", projA: 78, projB: 76 },
+      { sprint: "S7", projA: 82, projB: 80 },
     ],
   },
   {
     name: "CSAT",
     key: "csat",
     unit: "/5",
-    description: "Customer Satisfaction Score — satisfacción de usuarios universitarios",
+    description: "Customer Satisfaction Score — satisfacción de usuarios universitarios (estimado)",
     target: 4.5,
     thresholds: { green: 4.0, yellow: 3.0 },
     history: [
-      { sprint: "Sprint 1", projA: 3.1, projB: 3.4 },
-      { sprint: "Sprint 2", projA: 3.4, projB: 3.6 },
-      { sprint: "Sprint 3", projA: 3.7, projB: 3.8 },
-      { sprint: "Sprint 4", projA: 4.0, projB: 4.0 },
-      { sprint: "Sprint 5", projA: 4.3, projB: 4.2 },
-      { sprint: "Sprint 6", projA: 4.5, projB: 4.4 },
+      { sprint: "S0", projA: 0, projB: 0 },
+      { sprint: "S1", projA: 2.8, projB: 3.0 },
+      { sprint: "S2", projA: 3.0, projB: 3.3 },
+      { sprint: "S3", projA: 3.4, projB: 3.5 },
+      { sprint: "S4", projA: 3.8, projB: 3.8 },
+      { sprint: "S5", projA: 4.0, projB: 4.0 },
+      { sprint: "S6", projA: 4.3, projB: 4.3 },
+      { sprint: "S7", projA: 4.5, projB: 4.4 },
     ],
   },
   {
@@ -81,15 +89,17 @@ export const metrics: MetricData[] = [
     key: "velocity",
     unit: "pts/sprint",
     description: "Story points completados por sprint",
-    target: 40,
-    thresholds: { green: 35, yellow: 25 },
+    target: 30,
+    thresholds: { green: 25, yellow: 15 },
     history: [
-      { sprint: "Sprint 1", projA: 20, projB: 5 },
-      { sprint: "Sprint 2", projA: 26, projB: 7 },
-      { sprint: "Sprint 3", projA: 31, projB: 8 },
-      { sprint: "Sprint 4", projA: 35, projB: 9 },
-      { sprint: "Sprint 5", projA: 39, projB: 10 },
-      { sprint: "Sprint 6", projA: 43, projB: 11 },
+      { sprint: "S0", projA: 10, projB: 4 },
+      { sprint: "S1", projA: 20, projB: 5 },
+      { sprint: "S2", projA: 29, projB: 10 },
+      { sprint: "S3", projA: 26, projB: 8 },
+      { sprint: "S4", projA: 31, projB: 6 },
+      { sprint: "S5", projA: 29, projB: 8 },
+      { sprint: "S6", projA: 23, projB: 11 },
+      { sprint: "S7", projA: 18, projB: 5 },
     ],
   },
   {
@@ -100,12 +110,14 @@ export const metrics: MetricData[] = [
     target: 90,
     thresholds: { green: 85, yellow: 70 },
     history: [
-      { sprint: "Sprint 1", projA: 58, projB: 65 },
-      { sprint: "Sprint 2", projA: 65, projB: 70 },
-      { sprint: "Sprint 3", projA: 73, projB: 76 },
-      { sprint: "Sprint 4", projA: 80, projB: 82 },
-      { sprint: "Sprint 5", projA: 86, projB: 87 },
-      { sprint: "Sprint 6", projA: 92, projB: 90 },
+      { sprint: "S0", projA: 100, projB: 100 },
+      { sprint: "S1", projA: 70, projB: 75 },
+      { sprint: "S2", projA: 76, projB: 80 },
+      { sprint: "S3", projA: 82, projB: 82 },
+      { sprint: "S4", projA: 85, projB: 85 },
+      { sprint: "S5", projA: 80, projB: 88 },
+      { sprint: "S6", projA: 92, projB: 90 },
+      { sprint: "S7", projA: 95, projB: 95 },
     ],
   },
   {
@@ -117,12 +129,14 @@ export const metrics: MetricData[] = [
     thresholds: { green: 7, yellow: 14 },
     invertThreshold: true,
     history: [
-      { sprint: "Sprint 1", projA: 19, projB: 12 },
-      { sprint: "Sprint 2", projA: 16, projB: 10 },
-      { sprint: "Sprint 3", projA: 13, projB: 8 },
-      { sprint: "Sprint 4", projA: 10, projB: 7 },
-      { sprint: "Sprint 5", projA: 7, projB: 6 },
-      { sprint: "Sprint 6", projA: 5, projB: 5 },
+      { sprint: "S0", projA: 3, projB: 2 },
+      { sprint: "S1", projA: 18, projB: 10 },
+      { sprint: "S2", projA: 14, projB: 8 },
+      { sprint: "S3", projA: 11, projB: 7 },
+      { sprint: "S4", projA: 9, projB: 6 },
+      { sprint: "S5", projA: 8, projB: 5 },
+      { sprint: "S6", projA: 5, projB: 4 },
+      { sprint: "S7", projA: 4, projB: 3 },
     ],
   },
 ];
@@ -140,46 +154,50 @@ export function getTrafficStatus(metric: MetricData, value: number): TrafficStat
 
 // Comparative data — Leoneta: 5 ingenieros, Changarritos: 1 ingeniero
 export const resourceConsumption = [
-  { sprint: "Sprint 1", projA: 175, projB: 38, cardsA: 11, cardsB: 4 },
-  { sprint: "Sprint 2", projA: 190, projB: 40, cardsA: 14, cardsB: 5 },
-  { sprint: "Sprint 3", projA: 205, projB: 42, cardsA: 17, cardsB: 6 },
-  { sprint: "Sprint 4", projA: 198, projB: 40, cardsA: 19, cardsB: 6 },
-  { sprint: "Sprint 5", projA: 210, projB: 42, cardsA: 21, cardsB: 7 },
-  { sprint: "Sprint 6", projA: 218, projB: 44, cardsA: 24, cardsB: 8 },
+  { sprint: "S0", projA: 50, projB: 10, cardsA: 4, cardsB: 2 },
+  { sprint: "S1", projA: 175, projB: 35, cardsA: 5, cardsB: 2 },
+  { sprint: "S2", projA: 200, projB: 42, cardsA: 5, cardsB: 2 },
+  { sprint: "S3", projA: 195, projB: 38, cardsA: 5, cardsB: 2 },
+  { sprint: "S4", projA: 210, projB: 35, cardsA: 6, cardsB: 2 },
+  { sprint: "S5", projA: 220, projB: 40, cardsA: 7, cardsB: 3 },
+  { sprint: "S6", projA: 200, projB: 44, cardsA: 6, cardsB: 3 },
+  { sprint: "S7", projA: 150, projB: 25, cardsA: 5, cardsB: 2 },
 ];
 
 export const technicalDebt = [
-  { sprint: "Sprint 1", projA: 14, projB: 5 },
-  { sprint: "Sprint 2", projA: 17, projB: 7 },
-  { sprint: "Sprint 3", projA: 21, projB: 8 },
-  { sprint: "Sprint 4", projA: 19, projB: 9 },
-  { sprint: "Sprint 5", projA: 16, projB: 8 },
-  { sprint: "Sprint 6", projA: 12, projB: 6 },
+  { sprint: "S0", projA: 0, projB: 0 },
+  { sprint: "S1", projA: 8, projB: 3 },
+  { sprint: "S2", projA: 14, projB: 5 },
+  { sprint: "S3", projA: 18, projB: 6 },
+  { sprint: "S4", projA: 22, projB: 7 },
+  { sprint: "S5", projA: 25, projB: 8 },
+  { sprint: "S6", projA: 14, projB: 6 },
+  { sprint: "S7", projA: 8, projB: 4 },
 ];
 
 export const memberConclusions = [
   {
     member: teamMembers[0],
-    conclusion: "Como Tech Lead de Leoneta, coordiné la arquitectura de la plataforma de carpooling universitario para CUCEI. El proyecto alcanza ~35% de avance global: el frontend demo está al 65–75% con flujos funcionales (registro, login, búsqueda, publicación de viajes, perfil y calificaciones) operando con datos mock. De 10 objetivos, 2 están completos y 6 sin iniciar. La prioridad inmediata es la implementación de API/BD con NestJS y el flujo real de solicitud/aceptación de rides. En pruebas ejecutamos 15 casos (sistema, modulares e integración) con 80% de éxito (12 aprobados, 3 fallidos). Recomiendo priorizar el backend y la gestión de estados del ride para desbloquear el 50% de funcionalidades pendientes.",
+    conclusion: "Como Tech Lead de Leoneta, coordiné la arquitectura de la plataforma de carpooling universitario para CUCEI. A lo largo de 8 sprints (Sprint 0–7), el proyecto pasó de la fase preparatoria hasta el cierre con documentación completa. El backend con NestJS quedó funcional, la integración frontend-backend se completó en Sprint 3, y las correcciones críticas se resolvieron en Sprint 6. La predictibilidad mejoró de 70% a 95% y el Lead Time bajó de 18 a 4 días. Recomiendo continuar con la fase de seguridad avanzada e IA para recomendación de rutas en futuras iteraciones.",
   },
   {
     member: teamMembers[1],
-    conclusion: "En Leoneta desarrollé el frontend de los flujos principales: registro de usuario, búsqueda de viajes con filtros, publicación de viajes, perfil y sistema de calificaciones/valoraciones. Todos operan con datos mock en la demo. Las pruebas modulares (MC) de estos componentes pasaron al 100% (5/5 aprobados). El caso SYS_RESPONSIVE_013 falló porque en pantallas <400px el campo 'Destino' se desborda. Sugiero ajustar estilos responsive y preparar la integración frontend-backend sustituyendo mocks por llamadas reales con manejo de errores.",
+    conclusion: "En Leoneta desarrollé el frontend y lideré la integración con el backend en Sprint 3, sustituyendo todos los mocks por llamadas reales a la API. Los flujos de login, búsqueda, publicación y perfil quedaron conectados al backend. En Sprint 6 corregí el bug responsive del campo Destino en pantallas <400px. Las pruebas modulares de mis componentes pasaron al 100% (5/5). Sugiero seguir mejorando la experiencia móvil y agregar animaciones de transición entre pantallas.",
   },
   {
     member: teamMembers[2],
-    conclusion: "El backend de Leoneta está en etapa temprana (0–10%). Mi enfoque ha sido el diseño del esquema de base de datos (usuarios, viajes, solicitudes, calificaciones, reportes, auditoría) y la arquitectura de la API REST con NestJS. Los bugs principales identificados son: falta de estado global/persistente del ride, no se actualizan asientos al aceptar pasajeros, y no hay comunicación entre pantallas. Las pruebas de integración revelaron 2 de los 3 fallos (INT_Solicitud_Aceptar y INT_Viaje_Calificacion) por ausencia de backend real. El siguiente paso es implementar endpoints para login institucional, viajes, solicitudes y estados del ride.",
+    conclusion: "El backend de Leoneta se desarrolló entre Sprint 1 y Sprint 2, logrando una API REST completa con NestJS y PostgreSQL. Implementé el CRUD de usuarios y rides, el motor de coincidencias, los estados del ride y la autenticación institucional. En Sprint 6 corregí los bugs críticos de transición de estado a Completado y actualización de asientos. La deuda técnica se redujo de 25 a 8 ítems entre Sprint 5 y Sprint 7.",
   },
   {
     member: teamMembers[3],
-    conclusion: "Ejecuté 15 casos de prueba en Leoneta: 5 pruebas modulares (MC), 5 de integración (INT) y 5 de sistema (SYS). Resultado: 12 aprobados y 3 fallidos (80% de éxito). Los fallos fueron: INT_Solicitud_Aceptar_Notificacion_04 (falta estado del ride aceptado y alertas), INT_Viaje_Calificacion_05 (no existe transición a Completado ni flujo real de calificar), y SYS_RESPONSIVE_013 (desbordamiento del campo Destino en <400px). Los bugs críticos requieren un store global (Context/Redux/Zustand) y backend con BD para gestionar estados reales de los viajes.",
+    conclusion: "Ejecuté 15 casos de prueba en Leoneta durante Sprint 5: 5 modulares (MC), 5 de integración (INT) y 5 de sistema (SYS). Resultado: 12 aprobados y 3 fallidos (80% de éxito). Los fallos fueron: INT_Solicitud_Aceptar_Notificacion (falta alerta de aceptación), INT_Viaje_Calificacion (sin transición a Completado) y SYS_RESPONSIVE (desbordamiento <400px). Los 3 bugs se corrigieron en Sprint 6. En Sprint 7 realicé la validación final end-to-end y elaboré el Test Report.",
   },
   {
     member: teamMembers[4],
-    conclusion: "En Leoneta, la predictibilidad mejoró de 58% a 92%, reflejando mejor planificación del MVP. De 12 módulos en el backlog, 6 están implementados en demo (50%) y 6 bloqueados por falta de backend/BD. Trabajar en un equipo de 5 permitió especialización por módulo. Las fases pendientes incluyen: Fase 2 (Backend + BD NestJS, 0–10%), Fase 3 (Seguridad/Verificación + Incentivos, 0–5%) y Fase 4 (IA + analítica, 0%). Propongo priorizar la conexión frontend-backend y definir reglas de verificación institucional (correo UDG, comprobante de pertenencia).",
+    conclusion: "En Leoneta trabajé en el backend del motor de coincidencias (Sprint 2), la sincronización de flujos en tiempo real (Sprint 4) y la corrección del bug de notificaciones en Sprint 6. La velocidad del equipo alcanzó su pico de 31 pts en Sprint 4, bajando naturalmente en Sprint 7 (cierre). La cobertura de pruebas subió de 0% a 82%. Propongo para el futuro implementar WebSockets para notificaciones en tiempo real y mejorar el matching con factores de reputación.",
   },
   {
     member: teamMembers[5],
-    conclusion: "Como único integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. El proyecto de marketplace universitario alcanzó 76% de cobertura de pruebas, 90% de predictibilidad y un Lead Time de 5 días. Se ejecutaron pruebas de sistema, modulares e integración, identificando un único error en el módulo de filtros. Trabajar solo permitió agilidad en decisiones pero requirió disciplina estricta en testing y revisión de código. La deuda técnica se mantuvo controlada (6 ítems). Recomiendo incorporar al menos un integrante más para acelerar el desarrollo de la plataforma de centralización de ventas universitarias.",
+    conclusion: "Como único integrante de Changarritos, asumí todos los roles: frontend, backend, QA y deployment. En 8 sprints el marketplace universitario alcanzó 80% de cobertura de pruebas, 95% de predictibilidad y un Lead Time de 3 días. Se identificó un único error en el módulo de filtros de búsqueda (Sprint 5), que fue corregido en el mismo sprint. Trabajar solo permitió agilidad en decisiones pero requirió disciplina estricta. La deuda técnica se mantuvo controlada (4 ítems al cierre).",
   },
 ];
