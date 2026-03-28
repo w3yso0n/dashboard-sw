@@ -12,26 +12,24 @@ const chartStyle = {
 export default function ComparativePage() {
   const velocityMetric = metrics.find((m) => m.key === "velocity")!;
 
-  // Progress comparison (cumulative story points)
   let cumA = 0, cumB = 0;
   const progressData = velocityMetric.history.map((h) => {
     cumA += h.projA;
     cumB += h.projB;
-    return { sprint: h.sprint, Alpha: cumA, Beta: cumB };
+    return { sprint: h.sprint, Leoneta: cumA, Changarritos: cumB };
   });
 
-  // Hours per card
   const efficiencyData = resourceConsumption.map((r) => ({
     sprint: r.sprint,
-    Alpha: +(r.projA / r.cardsA).toFixed(1),
-    Beta: +(r.projB / r.cardsB).toFixed(1),
+    Leoneta: +(r.projA / r.cardsA).toFixed(1),
+    Changarritos: +(r.projB / r.cardsB).toFixed(1),
   }));
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Análisis Comparativo</h1>
-        <p className="text-sm text-muted-foreground">Comparación de rendimiento entre Proyecto Alpha y Proyecto Beta</p>
+        <p className="text-sm text-muted-foreground">Comparación de rendimiento entre Leoneta y Changarritos</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -47,8 +45,8 @@ export default function ComparativePage() {
                 <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
                 <Tooltip contentStyle={chartStyle} />
                 <Legend />
-                <Line type="monotone" dataKey="Alpha" stroke="hsl(142, 60%, 50%)" strokeWidth={2} />
-                <Line type="monotone" dataKey="Beta" stroke="hsl(199, 89%, 48%)" strokeWidth={2} />
+                <Line type="monotone" dataKey="Leoneta" stroke="hsl(142, 60%, 50%)" strokeWidth={2} />
+                <Line type="monotone" dataKey="Changarritos" stroke="hsl(199, 89%, 48%)" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
@@ -66,8 +64,8 @@ export default function ComparativePage() {
                 <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
                 <Tooltip contentStyle={chartStyle} />
                 <Legend />
-                <Bar dataKey="Alpha" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="Beta" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Leoneta" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Changarritos" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -85,8 +83,8 @@ export default function ComparativePage() {
                 <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
                 <Tooltip contentStyle={chartStyle} />
                 <Legend />
-                <Bar dataKey="projA" name="Alpha" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="projB" name="Beta" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="projA" name="Leoneta" fill="hsl(142, 60%, 50%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="projB" name="Changarritos" fill="hsl(199, 89%, 48%)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -104,8 +102,8 @@ export default function ComparativePage() {
                 <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
                 <Tooltip contentStyle={chartStyle} />
                 <Legend />
-                <Line type="monotone" dataKey="projA" name="Alpha" stroke="hsl(142, 60%, 50%)" strokeWidth={2} />
-                <Line type="monotone" dataKey="projB" name="Beta" stroke="hsl(199, 89%, 48%)" strokeWidth={2} />
+                <Line type="monotone" dataKey="projA" name="Leoneta" stroke="hsl(142, 60%, 50%)" strokeWidth={2} />
+                <Line type="monotone" dataKey="projB" name="Changarritos" stroke="hsl(199, 89%, 48%)" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>

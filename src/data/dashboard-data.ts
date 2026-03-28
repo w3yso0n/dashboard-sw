@@ -9,8 +9,8 @@ export const teamMembers = [
 ];
 
 export const projects = [
-  { id: "proj-a", name: "Proyecto Alpha", color: "hsl(142, 60%, 50%)" },
-  { id: "proj-b", name: "Proyecto Beta", color: "hsl(199, 89%, 48%)" },
+  { id: "leoneta", name: "Leoneta", color: "hsl(142, 60%, 50%)" },
+  { id: "changarritos", name: "Changarritos", color: "hsl(199, 89%, 48%)" },
 ];
 
 export type TrafficStatus = "green" | "yellow" | "red";
@@ -21,8 +21,8 @@ export interface MetricData {
   unit: string;
   description: string;
   target: number;
-  thresholds: { green: number; yellow: number }; // >= green = green, >= yellow = yellow, else red
-  invertThreshold?: boolean; // true if lower is better
+  thresholds: { green: number; yellow: number };
+  invertThreshold?: boolean;
   history: { sprint: string; projA: number; projB: number }[];
 }
 
@@ -36,12 +36,12 @@ export const metrics: MetricData[] = [
     thresholds: { green: 3, yellow: 5 },
     invertThreshold: true,
     history: [
-      { sprint: "Sprint 1", projA: 6.2, projB: 7.1 },
-      { sprint: "Sprint 2", projA: 5.1, projB: 5.8 },
-      { sprint: "Sprint 3", projA: 4.3, projB: 4.9 },
-      { sprint: "Sprint 4", projA: 3.5, projB: 4.2 },
-      { sprint: "Sprint 5", projA: 2.8, projB: 3.6 },
-      { sprint: "Sprint 6", projA: 2.1, projB: 3.1 },
+      { sprint: "Sprint 1", projA: 5.8, projB: 6.5 },
+      { sprint: "Sprint 2", projA: 4.9, projB: 5.4 },
+      { sprint: "Sprint 3", projA: 4.1, projB: 4.7 },
+      { sprint: "Sprint 4", projA: 3.3, projB: 4.0 },
+      { sprint: "Sprint 5", projA: 2.6, projB: 3.4 },
+      { sprint: "Sprint 6", projA: 1.9, projB: 2.8 },
     ],
   },
   {
@@ -52,28 +52,28 @@ export const metrics: MetricData[] = [
     target: 80,
     thresholds: { green: 75, yellow: 50 },
     history: [
-      { sprint: "Sprint 1", projA: 32, projB: 28 },
-      { sprint: "Sprint 2", projA: 45, projB: 38 },
-      { sprint: "Sprint 3", projA: 55, projB: 48 },
-      { sprint: "Sprint 4", projA: 65, projB: 56 },
-      { sprint: "Sprint 5", projA: 74, projB: 62 },
-      { sprint: "Sprint 6", projA: 81, projB: 70 },
+      { sprint: "Sprint 1", projA: 28, projB: 25 },
+      { sprint: "Sprint 2", projA: 40, projB: 35 },
+      { sprint: "Sprint 3", projA: 52, projB: 46 },
+      { sprint: "Sprint 4", projA: 63, projB: 55 },
+      { sprint: "Sprint 5", projA: 72, projB: 64 },
+      { sprint: "Sprint 6", projA: 79, projB: 71 },
     ],
   },
   {
     name: "CSAT",
     key: "csat",
     unit: "/5",
-    description: "Customer Satisfaction Score promedio",
+    description: "Customer Satisfaction Score — satisfacción de usuarios universitarios",
     target: 4.5,
     thresholds: { green: 4.0, yellow: 3.0 },
     history: [
-      { sprint: "Sprint 1", projA: 3.2, projB: 3.0 },
-      { sprint: "Sprint 2", projA: 3.5, projB: 3.3 },
-      { sprint: "Sprint 3", projA: 3.8, projB: 3.5 },
-      { sprint: "Sprint 4", projA: 4.0, projB: 3.7 },
-      { sprint: "Sprint 5", projA: 4.2, projB: 3.9 },
-      { sprint: "Sprint 6", projA: 4.4, projB: 4.1 },
+      { sprint: "Sprint 1", projA: 3.1, projB: 3.3 },
+      { sprint: "Sprint 2", projA: 3.4, projB: 3.5 },
+      { sprint: "Sprint 3", projA: 3.7, projB: 3.7 },
+      { sprint: "Sprint 4", projA: 4.0, projB: 3.9 },
+      { sprint: "Sprint 5", projA: 4.3, projB: 4.1 },
+      { sprint: "Sprint 6", projA: 4.5, projB: 4.3 },
     ],
   },
   {
@@ -84,12 +84,12 @@ export const metrics: MetricData[] = [
     target: 40,
     thresholds: { green: 35, yellow: 25 },
     history: [
-      { sprint: "Sprint 1", projA: 22, projB: 18 },
-      { sprint: "Sprint 2", projA: 28, projB: 24 },
-      { sprint: "Sprint 3", projA: 32, projB: 28 },
-      { sprint: "Sprint 4", projA: 36, projB: 30 },
-      { sprint: "Sprint 5", projA: 38, projB: 34 },
-      { sprint: "Sprint 6", projA: 42, projB: 37 },
+      { sprint: "Sprint 1", projA: 20, projB: 18 },
+      { sprint: "Sprint 2", projA: 26, projB: 23 },
+      { sprint: "Sprint 3", projA: 31, projB: 28 },
+      { sprint: "Sprint 4", projA: 35, projB: 32 },
+      { sprint: "Sprint 5", projA: 39, projB: 35 },
+      { sprint: "Sprint 6", projA: 43, projB: 38 },
     ],
   },
   {
@@ -100,12 +100,12 @@ export const metrics: MetricData[] = [
     target: 90,
     thresholds: { green: 85, yellow: 70 },
     history: [
-      { sprint: "Sprint 1", projA: 60, projB: 55 },
-      { sprint: "Sprint 2", projA: 68, projB: 62 },
-      { sprint: "Sprint 3", projA: 75, projB: 70 },
-      { sprint: "Sprint 4", projA: 82, projB: 76 },
-      { sprint: "Sprint 5", projA: 88, projB: 80 },
-      { sprint: "Sprint 6", projA: 91, projB: 85 },
+      { sprint: "Sprint 1", projA: 58, projB: 55 },
+      { sprint: "Sprint 2", projA: 65, projB: 63 },
+      { sprint: "Sprint 3", projA: 73, projB: 70 },
+      { sprint: "Sprint 4", projA: 80, projB: 77 },
+      { sprint: "Sprint 5", projA: 86, projB: 82 },
+      { sprint: "Sprint 6", projA: 92, projB: 87 },
     ],
   },
   {
@@ -117,12 +117,12 @@ export const metrics: MetricData[] = [
     thresholds: { green: 7, yellow: 14 },
     invertThreshold: true,
     history: [
-      { sprint: "Sprint 1", projA: 18, projB: 22 },
-      { sprint: "Sprint 2", projA: 15, projB: 19 },
-      { sprint: "Sprint 3", projA: 12, projB: 16 },
-      { sprint: "Sprint 4", projA: 10, projB: 13 },
-      { sprint: "Sprint 5", projA: 8, projB: 11 },
-      { sprint: "Sprint 6", projA: 6, projB: 9 },
+      { sprint: "Sprint 1", projA: 19, projB: 20 },
+      { sprint: "Sprint 2", projA: 16, projB: 17 },
+      { sprint: "Sprint 3", projA: 13, projB: 14 },
+      { sprint: "Sprint 4", projA: 10, projB: 12 },
+      { sprint: "Sprint 5", projA: 7, projB: 9 },
+      { sprint: "Sprint 6", projA: 5, projB: 7 },
     ],
   },
 ];
@@ -140,46 +140,46 @@ export function getTrafficStatus(metric: MetricData, value: number): TrafficStat
 
 // Comparative data
 export const resourceConsumption = [
-  { sprint: "Sprint 1", projA: 180, projB: 160, cardsA: 12, cardsB: 10 },
-  { sprint: "Sprint 2", projA: 195, projB: 175, cardsA: 15, cardsB: 13 },
-  { sprint: "Sprint 3", projA: 210, projB: 190, cardsA: 18, cardsB: 15 },
-  { sprint: "Sprint 4", projA: 200, projB: 195, cardsA: 20, cardsB: 17 },
-  { sprint: "Sprint 5", projA: 215, projB: 205, cardsA: 22, cardsB: 19 },
-  { sprint: "Sprint 6", projA: 220, projB: 210, cardsA: 24, cardsB: 21 },
+  { sprint: "Sprint 1", projA: 175, projB: 155, cardsA: 11, cardsB: 10 },
+  { sprint: "Sprint 2", projA: 190, projB: 170, cardsA: 14, cardsB: 12 },
+  { sprint: "Sprint 3", projA: 205, projB: 188, cardsA: 17, cardsB: 15 },
+  { sprint: "Sprint 4", projA: 198, projB: 192, cardsA: 19, cardsB: 17 },
+  { sprint: "Sprint 5", projA: 210, projB: 200, cardsA: 21, cardsB: 19 },
+  { sprint: "Sprint 6", projA: 218, projB: 208, cardsA: 24, cardsB: 21 },
 ];
 
 export const technicalDebt = [
-  { sprint: "Sprint 1", projA: 15, projB: 12 },
-  { sprint: "Sprint 2", projA: 18, projB: 16 },
-  { sprint: "Sprint 3", projA: 22, projB: 20 },
-  { sprint: "Sprint 4", projA: 20, projB: 23 },
-  { sprint: "Sprint 5", projA: 17, projB: 21 },
-  { sprint: "Sprint 6", projA: 14, projB: 18 },
+  { sprint: "Sprint 1", projA: 14, projB: 11 },
+  { sprint: "Sprint 2", projA: 17, projB: 15 },
+  { sprint: "Sprint 3", projA: 21, projB: 19 },
+  { sprint: "Sprint 4", projA: 19, projB: 22 },
+  { sprint: "Sprint 5", projA: 16, projB: 20 },
+  { sprint: "Sprint 6", projA: 12, projB: 17 },
 ];
 
 export const memberConclusions = [
   {
     member: teamMembers[0],
-    conclusion: "Como Tech Lead, he observado una mejora significativa en la madurez de nuestros procesos. La implementación de revisiones de código más rigurosas redujo la tasa de defectos en un 66%. Debemos continuar invirtiendo en automatización de pruebas para alcanzar el 90% de cobertura.",
+    conclusion: "Como Tech Lead, la arquitectura de Leoneta con autenticación institucional y el motor de coincidencias de rutas representaron retos técnicos significativos. La tasa de defectos bajó un 67% gracias a revisiones de código rigurosas. En Changarritos, la integración del catálogo centralizado de ventas se estabilizó a partir del Sprint 4. Recomiendo invertir en pruebas de integración end-to-end para ambos proyectos.",
   },
   {
     member: teamMembers[1],
-    conclusion: "La adopción de componentes reutilizables y un design system consistente aceleró nuestro desarrollo frontend. La velocidad del equipo mejoró un 90% desde el Sprint 1. Recomiendo priorizar la reducción de deuda técnica en el frontend para mantener esta tendencia.",
+    conclusion: "El desarrollo frontend de Leoneta requirió un UX cuidadoso para la publicación y búsqueda de viajes con mapas y horarios. En Changarritos, el diseño del marketplace universitario priorizó la simplicidad para los vendedores. La adopción de un design system compartido aceleró el desarrollo un 90%. Sugiero priorizar la reducción de deuda técnica en componentes de UI reutilizables.",
   },
   {
     member: teamMembers[2],
-    conclusion: "La arquitectura backend se estabilizó a partir del Sprint 4, reflejándose en la reducción del Lead Time. La implementación de CI/CD pipelines fue clave. El siguiente paso es implementar monitoreo en tiempo real para detectar problemas antes que lleguen a producción.",
+    conclusion: "El backend de Leoneta fue desafiante: motor de coincidencias conductor-pasajero, sistema de calificaciones y comunicación segura sin exponer datos personales. En Changarritos, la gestión de inventario y pedidos requirió transacciones robustas. Los pipelines CI/CD redujeron el Lead Time de 19 a 5 días. El siguiente paso es monitoreo en tiempo real.",
   },
   {
     member: teamMembers[3],
-    conclusion: "La cobertura de pruebas creció de 32% a 81% en Proyecto Alpha. Los tests automatizados detectaron el 73% de defectos antes de producción. Para mejorar, sugiero implementar pruebas de rendimiento y pruebas de integración end-to-end.",
+    conclusion: "La cobertura de pruebas creció de 28% a 79% en Leoneta, enfocándonos en el flujo de emparejamiento de rutas y validación de credenciales institucionales. En Changarritos alcanzamos 71%, cubriendo transacciones de venta y gestión de catálogo. Los tests automatizados detectaron el 75% de defectos antes de producción. Sugiero agregar pruebas de rendimiento para el motor de coincidencias.",
   },
   {
     member: teamMembers[4],
-    conclusion: "La predictibilidad del equipo mejoró de 60% a 91%, lo que demuestra una mejor planificación y estimación. La comunicación entre equipos fue esencial. Propongo sesiones de refinamiento más frecuentes para mantener este nivel.",
+    conclusion: "La predictibilidad mejoró de 58% a 92% en Leoneta, reflejando mejor planificación del MVP: registro institucional, perfiles, publicación de viajes y motor de coincidencias. En Changarritos pasamos de 55% a 87%. La comunicación entre ambos equipos fue clave para compartir patrones y evitar duplicación de esfuerzos.",
   },
   {
     member: teamMembers[5],
-    conclusion: "La infraestructura como código y los pipelines automatizados redujeron los tiempos de deployment en un 70%. La deuda técnica en infraestructura disminuyó. Recomiendo invertir en observabilidad y alertas proactivas para el siguiente ciclo.",
+    conclusion: "La infraestructura para Leoneta requirió configuración de servicios de geolocalización, envío de notificaciones y almacenamiento seguro de datos estudiantiles. En Changarritos, la escalabilidad para manejar picos de ventas universitarias fue prioritaria. Los pipelines automatizados redujeron tiempos de deployment en un 72%. Recomiendo invertir en observabilidad y alertas proactivas.",
   },
 ];
