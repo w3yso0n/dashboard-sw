@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,6 +50,11 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        traffic: {
+          green: "hsl(var(--traffic-green))",
+          yellow: "hsl(var(--traffic-yellow))",
+          red: "hsl(var(--traffic-red))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
