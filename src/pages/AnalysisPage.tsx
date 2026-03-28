@@ -5,22 +5,22 @@ const analyses = [
   {
     icon: Shield,
     question: "¿Cómo aseguran que las entregas cumplen con los estándares de calidad establecidos?",
-    answer: "Implementamos un pipeline de CI/CD con gates de calidad obligatorios: cobertura de pruebas mínima del 75%, revisión de código por al menos 2 peers (en Leoneta) y self-review con checklist en Changarritos. En Leoneta (5 integrantes), la tasa de defectos bajó de 5.8 a 1.9 defectos/KLOC, validando la seguridad del motor de coincidencias y la autenticación institucional. En Changarritos (1 integrante), bajó de 4.5 a 1.8 gracias a una disciplina estricta de testing automatizado. La menor complejidad del proyecto permitió un control más directo de la calidad.",
+    answer: "En Leoneta (5 integrantes) ejecutamos 15 casos de prueba divididos en tres suites: pruebas modulares (MC), de integración (INT) y de sistema (SYS), logrando un 80% de éxito (12 aprobados, 3 fallidos). Las pruebas modulares validaron los flujos individuales (registro, login, búsqueda, filtros, calificación) al 100%. Los fallos se concentraron en integración (falta de estado real del ride y transición a Completado) y sistema (responsive en <400px). La tasa de defectos bajó de 5.8 a 1.9 defectos/KLOC. En Changarritos (1 integrante), la disciplina de testing automatizado y análisis estático redujo la tasa de 4.5 a 1.8 defectos/KLOC.",
   },
   {
     icon: TrendingUp,
     question: "¿Qué tan estable y predecible es el proceso de desarrollo?",
-    answer: "La predictibilidad mejoró de 58% a 92% en Leoneta y de 65% a 90% en Changarritos. En Leoneta, con 5 personas, el reto fue coordinar estimaciones entre módulos (autenticación, motor de coincidencias, perfiles, calificaciones). En Changarritos, al ser una sola persona, la predictibilidad fue naturalmente más alta desde el inicio porque no había dependencias entre integrantes. Ambos proyectos estabilizaron su velocidad a partir del Sprint 4.",
+    answer: "La predictibilidad mejoró de 58% a 92% en Leoneta y de 65% a 90% en Changarritos. Leoneta alcanza ~35% de avance global: el frontend demo está al 65–75% con 6 de 12 módulos implementados, pero el backend (API REST/NestJS + BD) está al 0–10%. De 10 objetivos, solo 2 están completos y 6 sin iniciar. La coordinación entre 5 integrantes especializados por módulo fue clave para estabilizar la velocidad a partir del Sprint 4. Changarritos, al ser una sola persona, tuvo predictibilidad naturalmente alta desde el inicio sin dependencias entre integrantes.",
   },
   {
     icon: CheckCircle,
     question: "¿Cómo se mide y mejora continuamente la calidad del código?",
-    answer: "Métricas automatizadas: cobertura de pruebas (28% → 79% en Leoneta, 35% → 76% en Changarritos), complejidad ciclomática y deuda técnica. En Leoneta, los code reviews entre 5 integrantes fueron fundamentales para mantener consistencia arquitectónica. En Changarritos, la integrante única compensó la falta de peer review con testing exhaustivo y análisis estático automatizado. La deuda técnica se redujo de 14 a 12 ítems en Leoneta y de 5 a 6 en Changarritos (controlada dado el alcance).",
+    answer: "Métricas automatizadas: cobertura de pruebas (28% → 79% en Leoneta, 35% → 76% en Changarritos), complejidad ciclomática y deuda técnica. En Leoneta, los code reviews entre 5 integrantes y las tres suites de pruebas (modulares, integración y sistema) fueron fundamentales. Los 3 bugs críticos identificados son: falta de estado global/persistente del ride, no actualización de asientos al aceptar pasajeros, y falta de comunicación entre pantallas. Las soluciones requieren store global (Context/Redux/Zustand) y backend con BD. En Changarritos, el testing exhaustivo compensó la falta de peer review, manteniendo la deuda técnica controlada en 6 ítems.",
   },
   {
     icon: Target,
     question: "Si pudieran mejorar sólo un métrico, ¿cuál sería y por qué?",
-    answer: "Lead Time. Leoneta lo redujo de 19 a 5 días y Changarritos de 12 a 5 días. Changarritos tuvo ventaja natural por ser un equipo de una persona (menos overhead de coordinación). Para Leoneta, un Lead Time más corto permitiría iterar más rápido sobre el motor de coincidencias y obtener feedback de los usuarios universitarios más temprano. Reducirlo a 3 días requeriría feature flags, trunk-based development y mayor automatización. Es un métrico multiplicador: mejorarlo impulsa CSAT y velocidad simultáneamente.",
+    answer: "Lead Time. Leoneta lo redujo de 19 a 5 días y Changarritos de 12 a 5 días. Para Leoneta, un Lead Time más corto permitiría iterar más rápido sobre las fases pendientes: Fase 2 (Backend + BD NestJS), Fase 3 (Seguridad/Verificación e Incentivos) y Fase 4 (IA + analítica). Actualmente el 50% de funcionalidades están bloqueadas por falta de backend, por lo que reducir el Lead Time a 3 días con feature flags y trunk-based development aceleraría el desbloqueo. Es un métrico multiplicador: mejorarlo impulsa CSAT y velocidad simultáneamente, permitiendo obtener feedback real de la comunidad CUCEI más temprano.",
   },
 ];
 
