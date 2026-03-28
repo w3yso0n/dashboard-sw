@@ -48,7 +48,20 @@ export default function Index() {
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <Card className="border-border bg-accent/50">
+        <CardContent className="pt-4 flex items-start gap-3">
+          <div className="rounded-lg bg-primary/10 p-2 mt-0.5">
+            <Info className="h-5 w-5 text-primary" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold">Nota sobre métricas de satisfacción</p>
+            <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+              Las pruebas y métricas de satisfacción de usuario (CSAT) aún no incluyen datos reales, ya que los proyectos no han sido lanzados ni finalizados. Los valores actuales son estimaciones basadas en pruebas internas con datos mock.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
         {latestMetrics.map((m) => (
           <Card key={m.key} className="border-border bg-card">
             <CardContent className="pt-4 space-y-2">
