@@ -1,11 +1,11 @@
 // Team members
 export const teamMembers = [
-  { id: 1, name: "Carlos Méndez", role: "Tech Lead", projects: ["Leoneta"] },
-  { id: 2, name: "Ana García", role: "Frontend Dev", projects: ["Leoneta"] },
-  { id: 3, name: "Luis Hernández", role: "Backend Dev", projects: ["Leoneta"] },
-  { id: 4, name: "María López", role: "QA Engineer", projects: ["Leoneta"] },
-  { id: 5, name: "Jorge Ramírez", role: "Full Stack Dev", projects: ["Leoneta"] },
-  { id: 6, name: "Sofía Torres", role: "Full Stack Dev", projects: ["Changarritos"] },
+  { id: 1, name: "Luis Avila", role: "Tech Lead", projects: ["Leoneta"] },
+  { id: 2, name: "Alberto Vera", role: "Frontend Dev", projects: ["Leoneta"] },
+  { id: 3, name: "Franco Aldrete", role: "Backend Dev", projects: ["Leoneta"] },
+  { id: 4, name: "Braulio Jimenez", role: "QA Engineer", projects: ["Leoneta"] },
+  { id: 5, name: "Emmanuel Woo", role: "Full Stack Dev", projects: ["Leoneta"] },
+  { id: 6, name: "Faed Velasco", role: "Full Stack Dev", projects: ["Changarritos"] },
 ];
 
 export const projects = [
