@@ -39,15 +39,15 @@ export default function ComparativePage() {
       <div>
         <h1 className="text-2xl font-bold">Análisis Comparativo</h1>
         <p className="text-sm text-muted-foreground">
-          Leoneta (5 integrantes) vs Changarritos (1 integrante, Faed). Los gráficos cubren las{" "}
-          <span className="text-foreground font-medium">{planSummary.totalWeeks} semanas</span> del plan
-          (etiquetas <span className="font-mono">S1–S8</span>). En <span className="text-foreground font-medium">S1–S4</span>{" "}
-          Changarritos muestra más puntos por semana (enfoque y menos coordinación). A partir de{" "}
+          Leoneta (5 integrantes) vs Changarritos (1 integrante, Faed). Los gráficos cubren los{" "}
+          <span className="text-foreground font-medium">{planSummary.totalSprints} sprints</span> del plan ({planSummary.sprintCadenceNote};
+          eje <span className="font-mono">S1–S8</span>). En <span className="text-foreground font-medium">S1–S4</span>{" "}
+          Changarritos muestra más puntos por sprint (enfoque y menos coordinación). A partir de{" "}
           <span className="text-foreground font-medium">S5</span>, Leoneta alinea el ritmo al feedback del curso:{" "}
-          <span className="text-foreground font-medium">mismo “punch” semanal</span> que Changarritos pese al tamaño del equipo.
-          El plan del tablero está{" "}
-          <span className="text-foreground font-medium">cerrado en la semana {planSummary.activeWeekNumber}</span>
-          {" "}(referencia {planSummary.activeWeekLabel}).
+          <span className="text-foreground font-medium">mismo “punch” por sprint</span> que Changarritos pese al tamaño del equipo.
+          El plan está{" "}
+          <span className="text-foreground font-medium">cerrado en el sprint {planSummary.activeSprintNumber}</span>
+          {" "}(referencia {planSummary.activeSprintLabel}).
         </p>
       </div>
 
@@ -73,7 +73,7 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Velocidad por persona — pts/semana/persona (S1–S8)</CardTitle>
+            <CardTitle className="text-sm">Velocidad por persona — pts/sprint/persona (S1–S8)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">

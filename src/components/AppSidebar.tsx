@@ -1,4 +1,4 @@
-import { BarChart3, GitCompare, Users, LayoutDashboard, ListTodo } from "lucide-react";
+import { BarChart3, GitCompare, LayoutDashboard } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -9,8 +9,6 @@ const items = [
   { title: "Resumen", url: "/", icon: LayoutDashboard },
   { title: "Métricas", url: "/metrics", icon: BarChart3 },
   { title: "Comparativo", url: "/comparative", icon: GitCompare },
-  { title: "Backlog", url: "/backlog", icon: ListTodo },
-  { title: "Estado del equipo", url: "/conclusions", icon: Users },
 ];
 
 export function AppSidebar() {

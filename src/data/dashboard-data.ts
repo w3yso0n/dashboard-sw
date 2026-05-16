@@ -41,15 +41,20 @@ export interface MetricData {
   history: { sprint: string; projA: number; projB: number }[];
 }
 
-/** Plan de trabajo en semanas (S1–S8) para gráficos y backlog; misma escala para Leoneta (projA) y Changarritos (projB). */
+/** Plan de 8 sprints de 2 semanas cada uno (eje S1–S8 en gráficos); misma escala para Leoneta (projA) y Changarritos (projB). */
 export const planSummary = {
-  totalWeeks: 8,
-  /** Plan cerrado en la última semana reportada (S8). */
-  activeWeekNumber: 8,
-  activeWeekLabel: "S8",
+  totalSprints: 8,
+  sprintCadenceWeeks: 2,
+  /** Texto corto para copy en UI (cadencia del sprint). */
+  sprintCadenceNote: "cada sprint = 2 semanas",
+  /** Equivalente en calendario (8 × 2 semanas). */
+  totalCalendarWeeks: 16,
+  /** Plan cerrado en el último sprint reportado (S8). */
+  activeSprintNumber: 8,
+  activeSprintLabel: "S8",
 } as const;
 
-// Leoneta: 5 ingenieros (projA). Changarritos: 1 (projB). Serie S1–S8 (8 semanas).
+// Leoneta: 5 ingenieros (projA). Changarritos: 1 (projB). Serie S1–S8 (8 sprints de 2 semanas).
 export const metrics: MetricData[] = [
   {
     name: "Tasa de defectos (Defect Density)",
@@ -104,7 +109,7 @@ export const metrics: MetricData[] = [
       "Satisfacción percibida tras una entrega o demo, como porcentaje de respuestas positivas. En este proyecto la encuesta se aplicó a 17 amigos de la carrera (muestra pequeña pero homogénea y cercana al contexto académico).",
     formula: "(Respuestas positivas ÷ Total de respuestas) × 100. Muestra: N = 17 (compañeros de la carrera).",
     idealGoal: "≥ 85 % de satisfacción (con N = 17, interpretar tendencia más que precisión estadística fina).",
-    tools: "Encuesta breve (p. ej. Google Forms) a 17 compañeros de la carrera tras cada hito o release demo.",
+    tools: "Encuesta breve (p. ej. Google Forms) a 17 compañeros de la carrera tras cada hito o release demo (al cierre de cada sprint de 2 semanas).",
     target: 85,
     thresholds: { green: 85, yellow: 75 },
     history: [
@@ -123,8 +128,8 @@ export const metrics: MetricData[] = [
     key: "velocity",
     unit: "pts/sprint",
     description:
-      "Promedio de story points completados por sprint; refleja productividad y capacidad del equipo en la unidad de trabajo acordada.",
-    formula: "Σ Story points completados ÷ Número de sprints (media por sprint en esta serie).",
+      "Promedio de story points completados por sprint (cada sprint = 2 semanas); refleja productividad y capacidad del equipo en la unidad de trabajo acordada.",
+    formula: "Σ Story points completados ÷ Número de sprints (media por sprint en esta serie; sprint de 2 semanas).",
     idealGoal: "Consistente en el tiempo o con tendencia al alza.",
     tools: "Jira, Azure Boards, Trello, ClickUp.",
     target: 30,
@@ -145,7 +150,7 @@ export const metrics: MetricData[] = [
     key: "predictability",
     unit: "%",
     description:
-      "Grado en que el equipo cumple los compromisos asumidos en cada sprint o release respecto al alcance planificado.",
+      "Grado en que el equipo cumple los compromisos asumidos en cada sprint (cada sprint = 2 semanas) o release respecto al alcance planificado.",
     formula: "(Story points completados a tiempo ÷ Story points comprometidos) × 100.",
     idealGoal: "Entre 90 % y 110 % de cumplimiento (compromiso realista y entrega alineada).",
     tools: "Jira, Azure DevOps, Rally, VersionOne.",
@@ -232,7 +237,7 @@ export function getTrafficLabel(metric: MetricData, value: number): string {
   return "En rango; meta pendiente";
 }
 
-// Comparative data — S1–S4: Changarritos (1 pers.) con mayor ritmo de pts/semana; S5–S8: ambos proyectos con “mismo punch” semanal.
+// Comparative data — S1–S4: Changarritos (1 pers.) con mayor ritmo de pts por sprint; S5–S8: ambos proyectos con “mismo punch” por sprint.
 export const resourceConsumption = [
   { sprint: "S1", projA: 78, projB: 21, cardsA: 6, cardsB: 3 },
   { sprint: "S2", projA: 74, projB: 20, cardsA: 6, cardsB: 3 },

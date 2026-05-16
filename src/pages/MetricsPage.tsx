@@ -1,5 +1,5 @@
 import { MetricCard } from "@/components/MetricCard";
-import { metrics } from "@/data/dashboard-data";
+import { metrics, planSummary } from "@/data/dashboard-data";
 
 export default function MetricsPage() {
   return (
@@ -7,7 +7,8 @@ export default function MetricsPage() {
       <div>
         <h1 className="text-2xl font-bold">Métricas de Software</h1>
         <p className="text-sm text-muted-foreground">
-          Definiciones alineadas al marco de referencia: descripción, fórmula, objetivo ideal, herramientas típicas, semáforo e historial por sprint.
+          Plan de {planSummary.totalSprints} sprints ({planSummary.sprintCadenceNote}). Definiciones alineadas al marco de referencia:
+          descripción, fórmula, objetivo ideal, herramientas típicas, semáforo e historial por sprint (eje S1–S8).
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

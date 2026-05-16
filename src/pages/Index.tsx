@@ -23,19 +23,19 @@ const queEsLaMetrica: Record<string, string> = {
   "test-coverage":
     "Qué tanto de nuestro código está cubierto por pruebas automáticas. Mientras más alto, más seguro es cambiar cosas sin romper lo demás.",
   csat:
-    "Porcentaje de respuestas positivas en una encuesta corta después de una entrega o demo. La aplicamos a 17 amigos de la carrera como usuarios de prueba; el número es chico, pero ayuda a ver si la tendencia mejora semana a semana.",
+    "Porcentaje de respuestas positivas en una encuesta corta después de una entrega o demo. La aplicamos a 17 amigos de la carrera como usuarios de prueba; el número es chico, pero ayuda a ver si la tendencia mejora de sprint en sprint.",
   velocity:
-    "Cuánto trabajo terminamos por semana, medido en puntos. Sirve para ver el ritmo de nuestro equipo; no es para compararnos con otro equipo solo por el número.",
+    "Cuánto trabajo terminamos por sprint (cada sprint son 2 semanas), medido en puntos. Sirve para ver el ritmo de nuestro equipo; no es para compararnos con otro equipo solo por el número.",
   predictability:
-    "Qué tan bien cumplimos lo que nos propusimos hacer en la semana (en %). Cerca del 100 % suele ser bueno: ni prometemos de más ni de menos.",
+    "Qué tan bien cumplimos lo que nos propusimos hacer en cada sprint (en %). Cerca del 100 % suele ser bueno: ni prometemos de más ni de menos.",
   "lead-time":
     "Cuántos días pasan desde que nace una tarea hasta que queda lista para el usuario. Mientras menos días, más rápido entregamos valor.",
 };
 
 export default function Index() {
   const canonicalHistory = metrics[0].history;
-  const currentWeekNumber = planSummary.activeWeekNumber;
-  const planWeeksTotal = planSummary.totalWeeks;
+  const lastSprintNumber = planSummary.activeSprintNumber;
+  const totalSprints = planSummary.totalSprints;
 
   const latestMetrics = metrics.map((m) => {
     const { latest, prev } = latestVersusPriorDistinct(m.history);
@@ -57,9 +57,9 @@ export default function Index() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           Aquí ves de un vistazo <span className="text-foreground font-medium">Leoneta</span> (carpool) y{" "}
           <span className="text-foreground font-medium">Changarritos</span> (el otro producto). El trabajo se organizó en{" "}
-          <span className="text-foreground font-medium">{planWeeksTotal} semanas</span> y el plan ya terminó en la{" "}
-          <span className="text-foreground font-medium">semana {currentWeekNumber}</span>. Los gráficos van de la semana 1 a la 8
-          (se ven como S1…S8). Abajo, cada tarjeta resume un indicador en lenguaje sencillo.
+          <span className="text-foreground font-medium">{totalSprints} sprints</span> ({planSummary.sprintCadenceNote}) y el plan ya terminó en el{" "}
+          <span className="text-foreground font-medium">sprint {lastSprintNumber}</span>. Los gráficos van del sprint 1 al 8
+          (etiquetas <span className="font-mono">S1…S8</span>). Abajo, cada tarjeta resume un indicador en lenguaje sencillo.
         </p>
       </div>
 
@@ -80,10 +80,10 @@ export default function Index() {
           <CardContent className="pt-4 flex items-center gap-3">
             <div className="rounded-lg bg-primary/10 p-2"><Activity className="h-5 w-5 text-primary" /></div>
             <div>
-              <p className="text-2xl font-bold font-mono">{currentWeekNumber}</p>
-              <p className="text-xs text-muted-foreground">Semana en que cerramos el plan</p>
+              <p className="text-2xl font-bold font-mono">{lastSprintNumber}</p>
+              <p className="text-xs text-muted-foreground">Último sprint del plan</p>
               <p className="text-[10px] text-muted-foreground mt-0.5">
-                Ocho semanas en total · En los gráficos: {canonicalHistory[0].sprint} hasta {canonicalHistory[canonicalHistory.length - 1].sprint}
+                {totalSprints} sprints ({planSummary.totalCalendarWeeks} semanas de calendario) · En los gráficos: {canonicalHistory[0].sprint} hasta {canonicalHistory[canonicalHistory.length - 1].sprint}
               </p>
             </div>
           </CardContent>

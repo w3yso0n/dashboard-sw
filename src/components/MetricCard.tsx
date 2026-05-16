@@ -59,7 +59,7 @@ export function MetricCard({ metric }: { metric: MetricData }) {
 
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>Meta del proyecto: {formatTargetLine(metric)}</span>
-          <span className="font-mono">{metric.history.length} pts. en serie</span>
+          <span className="font-mono">{metric.history.length} sprints en serie</span>
         </div>
       </CardContent>
     </Card>
