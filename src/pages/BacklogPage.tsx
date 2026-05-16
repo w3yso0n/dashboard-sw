@@ -21,10 +21,13 @@ const priorityConfig: Record<TaskPriority, { label: string; className: string }>
   low: { label: "Baja", className: "bg-muted text-muted-foreground" },
 };
 
-const CURRENT_SPRINT = "Sprint 4";
+const LAST_SPRINT = "Semana 8";
+
+/** Todas las historias del backlog están en Completado (plan 8 semanas cerrado). */
+const planFullyDone = backlogTasks.every((t) => t.status === "done");
 
 export default function BacklogPage() {
-  const [selectedSprint, setSelectedSprint] = useState<string>(CURRENT_SPRINT);
+  const [selectedSprint, setSelectedSprint] = useState<string>("all");
   const [selectedProject, setSelectedProject] = useState<string>("leoneta");
 
   const filtered = backlogTasks.filter((t) => {
@@ -43,8 +46,12 @@ export default function BacklogPage() {
       <div>
         <h1 className="text-2xl font-bold text-foreground">Backlog de Actividades</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          <span className="text-foreground font-medium">{CURRENT_SPRINT} en curso</span>
-          {" · "}Leoneta: Sprints 0–3 cerrados a nivel funcional; 4 en curso; 5–7 planificados. Changarritos: plan de 9 sprints (0–8); 0–3 cerrados; 4 en curso; 5–8 planificados. Usa el filtro para ver cada sprint.
+          <span className="text-foreground font-medium">Plan Semana 1–{LAST_SPRINT.replace("Semana ", "")} cerrado</span>
+          {" · "}Todas las tareas figuran como <span className="text-foreground font-medium">Completado</span>. Leoneta cubre los
+          29 requerimientos (1.1–29.1): registro @alumnos.udg.mx, login, búsqueda, filtros, resultados, solicitud, estado, notificación,
+          mapa, seguridad visual, navegación, responsive, flujo E2E, errores, perfil, historial de calificaciones, chat, calificación
+          post-viaje, rutinas, conflicto de rutinas, historial de viajes, detalle, cancelación, panel conductor, publicación, accesibilidad,
+          rendimiento y cierre QA. Changarritos en paralelo hasta la misma Semana 8. Filtra por semana o por proyecto.
         </p>
       </div>
 
@@ -58,10 +65,10 @@ export default function BacklogPage() {
         </Tabs>
         <Select value={selectedSprint} onValueChange={setSelectedSprint}>
           <SelectTrigger className="w-[160px]">
-            <SelectValue placeholder="Sprint" />
+            <SelectValue placeholder="Semana" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos los sprints</SelectItem>
+            <SelectItem value="all">Todas las semanas</SelectItem>
             {sprintList.map((s) => (
               <SelectItem key={s} value={s}>{s}</SelectItem>
             ))}
@@ -102,9 +109,14 @@ export default function BacklogPage() {
         <CardHeader className="pb-3">
           <CardTitle className="text-base flex items-center gap-2 flex-wrap">
             <ListTodo className="h-4 w-4" />
-            {selectedProject === "leoneta" ? "Leoneta" : "Changarritos"} — {selectedSprint === "all" ? "Todos los Sprints" : selectedSprint}
-            {selectedSprint === CURRENT_SPRINT && (
-              <Badge variant="secondary" className="text-xs font-normal">Sprint actual</Badge>
+            {selectedProject === "leoneta" ? "Leoneta" : "Changarritos"} — {selectedSprint === "all" ? "Todas las semanas" : selectedSprint}
+            {planFullyDone && (
+              <Badge variant="secondary" className="text-xs font-normal bg-green-500/15 text-green-800 dark:text-green-300 border-green-500/30">
+                Plan 8 semanas completado
+              </Badge>
+            )}
+            {selectedSprint === LAST_SPRINT && (
+              <Badge variant="outline" className="text-xs font-normal">Última semana</Badge>
             )}
           </CardTitle>
         </CardHeader>

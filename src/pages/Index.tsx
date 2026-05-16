@@ -1,24 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { metrics, getTrafficLabel, getTrafficStatus, teamMembers, projects } from "@/data/dashboard-data";
+import { metrics, getTrafficLabel, getTrafficStatus, teamMembers, projects, formatTargetLine, planSummary } from "@/data/dashboard-data";
 import { TrafficLight } from "@/components/TrafficLight";
 import { ArrowDown, ArrowUp, Users, FolderKanban, Activity, Clock, Info } from "lucide-react";
 
-/** Último sprint con valores distintos al siguiente (serie “congelada” = sprint en curso según datos). */
-function currentSprintLabelFromHistory(history: { sprint: string; projA: number; projB: number }[]): string {
-  let plateauStart = history.length - 1;
-  for (let i = history.length - 2; i >= 0; i--) {
-    const cur = history[i];
-    const next = history[i + 1];
-    if (cur.projA !== next.projA || cur.projB !== next.projB) {
-      plateauStart = i + 1;
-      break;
-    }
-    plateauStart = i;
-  }
-  return history[plateauStart].sprint;
-}
-
-/** Compara el último punto con el sprint previo con cifras distintas (evita tendencia 0 cuando S4–S8 están congelados). */
+/** Compara el último punto con el sprint previo con cifras distintas (evita tendencia 0 cuando la serie se congela). */
 function latestVersusPriorDistinct(history: { projA: number; projB: number }[]) {
   const latest = history[history.length - 1];
   for (let i = history.length - 2; i >= 0; i--) {
@@ -31,28 +16,26 @@ function latestVersusPriorDistinct(history: { projA: number; projB: number }[]) 
   return { latest, prev: fallback };
 }
 
-/** Texto breve y poco técnico para el resumen (clave = `metric.key`). */
+/** Qué significa cada número, en palabras simples (para la presentación). */
 const queEsLaMetrica: Record<string, string> = {
   "defect-density":
-    "Cuántos errores o fallos aparecen en relación al tamaño del código; mientras menos, mejor.",
+    "Cuántos fallos o bugs aparecen comparados con el tamaño del código que entregamos. Mientras menos, mejor.",
   "test-coverage":
-    "Qué parte del código tiene pruebas que ayudan a detectar fallos antes de que lleguen a usuarios.",
+    "Qué tanto de nuestro código está cubierto por pruebas automáticas. Mientras más alto, más seguro es cambiar cosas sin romper lo demás.",
   csat:
-    "Qué tan contentos dicen estar los usuarios, del 1 al 5. Por ahora no reportamos puntaje: el desarrollo sigue en curso y la medición real vendrá cuando la app esté en uso.",
+    "Porcentaje de respuestas positivas en una encuesta corta después de una entrega o demo. La aplicamos a 17 amigos de la carrera como usuarios de prueba; el número es chico, pero ayuda a ver si la tendencia mejora semana a semana.",
   velocity:
-    "Cantidad de trabajo terminado en cada sprint, en puntos. Sirve para ver ritmo, no para comparar equipos de un tamaño distinto.",
+    "Cuánto trabajo terminamos por semana, medido en puntos. Sirve para ver el ritmo de nuestro equipo; no es para compararnos con otro equipo solo por el número.",
   predictability:
-    "Porcentaje de lo que el equipo se comprometió a entregar en el sprint y que realmente terminó; mide qué tan acertado es el plan.",
+    "Qué tan bien cumplimos lo que nos propusimos hacer en la semana (en %). Cerca del 100 % suele ser bueno: ni prometemos de más ni de menos.",
   "lead-time":
-    "Días que pasan desde que se pide algo hasta que queda listo; menos tiempo suele indicar un flujo más fluido.",
+    "Cuántos días pasan desde que nace una tarea hasta que queda lista para el usuario. Mientras menos días, más rápido entregamos valor.",
 };
 
 export default function Index() {
   const canonicalHistory = metrics[0].history;
-  const currentSprintLabel = currentSprintLabelFromHistory(canonicalHistory);
-  const currentSprintNum = Number.parseInt(currentSprintLabel.replace(/^S/i, ""), 10);
-  const leonetaSprintTotal = canonicalHistory.length - 1;
-  const changarritosSprintTotal = canonicalHistory.length;
+  const currentWeekNumber = planSummary.activeWeekNumber;
+  const planWeeksTotal = planSummary.totalWeeks;
 
   const latestMetrics = metrics.map((m) => {
     const { latest, prev } = latestVersusPriorDistinct(m.history);
@@ -60,19 +43,23 @@ export default function Index() {
     const avgPrev = (prev.projA + prev.projB) / 2;
     const trend = avgCurrent - avgPrev;
     const improving = m.invertThreshold ? trend < 0 : trend > 0;
-    return { ...m, avgCurrent, trend, improving, status: getTrafficStatus(m, avgCurrent) };
+    const roundish = m.key === "csat" || m.key === "test-coverage" || m.key === "predictability";
+    return { ...m, avgCurrent, trend, improving, roundish, status: getTrafficStatus(m, avgCurrent) };
   });
+
+  const fmtAvg = (m: (typeof latestMetrics)[0]) =>
+    m.roundish ? String(Math.round(m.avgCurrent)) : m.avgCurrent.toFixed(1);
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Resumen</h1>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Vista general de los dos productos en desarrollo. El trabajo activo corresponde al{" "}
-          <span className="text-foreground font-medium">sprint {currentSprintNum}</span>
-          {" "}
-          (última actualización de cifras: {currentSprintLabel}). Leoneta contempla {leonetaSprintTotal} sprints en total y
-          Changarritos {changarritosSprintTotal}.
+          Aquí ves de un vistazo <span className="text-foreground font-medium">Leoneta</span> (carpool) y{" "}
+          <span className="text-foreground font-medium">Changarritos</span> (el otro producto). El trabajo se organizó en{" "}
+          <span className="text-foreground font-medium">{planWeeksTotal} semanas</span> y el plan ya terminó en la{" "}
+          <span className="text-foreground font-medium">semana {currentWeekNumber}</span>. Los gráficos van de la semana 1 a la 8
+          (se ven como S1…S8). Abajo, cada tarjeta resume un indicador en lenguaje sencillo.
         </p>
       </div>
 
@@ -86,17 +73,17 @@ export default function Index() {
         <Card className="border-border bg-card">
           <CardContent className="pt-4 flex items-center gap-3">
             <div className="rounded-lg bg-primary/10 p-2"><FolderKanban className="h-5 w-5 text-primary" /></div>
-            <div><p className="text-2xl font-bold font-mono">{projects.length}</p><p className="text-xs text-muted-foreground">Proyectos activos</p></div>
+            <div><p className="text-2xl font-bold font-mono">{projects.length}</p><p className="text-xs text-muted-foreground">Productos</p></div>
           </CardContent>
         </Card>
         <Card className="border-border bg-card">
           <CardContent className="pt-4 flex items-center gap-3">
             <div className="rounded-lg bg-primary/10 p-2"><Activity className="h-5 w-5 text-primary" /></div>
             <div>
-              <p className="text-2xl font-bold font-mono">{currentSprintNum}</p>
-              <p className="text-xs text-muted-foreground">Sprint en curso</p>
+              <p className="text-2xl font-bold font-mono">{currentWeekNumber}</p>
+              <p className="text-xs text-muted-foreground">Semana en que cerramos el plan</p>
               <p className="text-[10px] text-muted-foreground mt-0.5">
-                Leoneta: {leonetaSprintTotal} sprints · Changarritos: {changarritosSprintTotal}
+                Ocho semanas en total · En los gráficos: {canonicalHistory[0].sprint} hasta {canonicalHistory[canonicalHistory.length - 1].sprint}
               </p>
             </div>
           </CardContent>
@@ -106,7 +93,7 @@ export default function Index() {
             <div className="rounded-lg bg-primary/10 p-2"><Clock className="h-5 w-5 text-primary" /></div>
             <div>
               <p className="text-2xl font-bold font-mono">{metrics.length}</p>
-              <p className="text-xs text-muted-foreground">Indicadores seguidos</p>
+              <p className="text-xs text-muted-foreground">Indicadores que mostramos</p>
             </div>
           </CardContent>
         </Card>
@@ -118,11 +105,12 @@ export default function Index() {
             <Info className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-sm font-semibold">Sobre la satisfacción de usuarios (CSAT)</p>
+            <p className="text-sm font-semibold">Cómo leer esta pantalla</p>
             <p className="text-xs text-muted-foreground leading-relaxed mt-1">
-              Todavía no llegamos a la etapa en la que el CSAT refleje usuarios reales usando la app en su día a día: falta avanzar en el
-              desarrollo, estabilizar el producto y desplegarlo. Por eso la tarjeta muestra -/5: aún no hay dato medible.
-              La meta 4.5 /5 del proyecto aplica cuando exista ese uso real y se pueda medir de forma formal.
+              Cada tarjeta de abajo tiene un <span className="text-foreground font-medium">semáforo</span> (verde / amarillo / rojo) y un
+              número grande: es el <span className="text-foreground font-medium">promedio entre Leoneta y Changarritos</span>. La
+              flecha con un número indica si ese promedio <span className="text-foreground font-medium">subió o bajó</span> respecto al
+              dato anterior en la gráfica. Las definiciones técnicas largas están en la página Métricas.
             </p>
           </div>
         </CardContent>
@@ -136,42 +124,28 @@ export default function Index() {
                 <p className="text-sm font-semibold leading-snug">{m.name}</p>
                 <TrafficLight
                   status={m.status}
-                  neutral={m.key === "csat"}
-                  label={m.key === "csat" ? "Sin medición aún" : getTrafficLabel(m, m.avgCurrent)}
+                  label={getTrafficLabel(m, m.avgCurrent)}
                 />
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">{queEsLaMetrica[m.key] ?? m.description}</p>
               <div className="flex items-end gap-2">
-                {m.key === "csat" ? (
-                  <span className="font-mono text-3xl font-bold">-/5</span>
-                ) : (
-                  <>
-                    <span className="font-mono text-3xl font-bold">{m.avgCurrent.toFixed(1)}</span>
-                    <span className="text-xs text-muted-foreground mb-1">{m.unit}</span>
-                  </>
-                )}
-                {m.key !== "csat" && (
-                  <span className={`ml-auto flex items-center text-xs font-medium ${m.improving ? "text-traffic-green" : "text-traffic-red"}`}>
-                    {m.invertThreshold
-                      ? m.improving
-                        ? <ArrowDown className="h-3 w-3 mr-0.5" />
-                        : <ArrowUp className="h-3 w-3 mr-0.5" />
-                      : m.improving
-                        ? <ArrowUp className="h-3 w-3 mr-0.5" />
-                        : <ArrowDown className="h-3 w-3 mr-0.5" />}
-                    {Math.abs(m.trend).toFixed(1)}
-                  </span>
-                )}
+                <>
+                  <span className="font-mono text-3xl font-bold">{fmtAvg(m)}</span>
+                  <span className="text-xs text-muted-foreground mb-1">{m.unit}</span>
+                </>
+                <span className={`ml-auto flex items-center text-xs font-medium ${m.improving ? "text-traffic-green" : "text-traffic-red"}`}>
+                  {m.invertThreshold
+                    ? m.improving
+                      ? <ArrowDown className="h-3 w-3 mr-0.5" />
+                      : <ArrowUp className="h-3 w-3 mr-0.5" />
+                    : m.improving
+                      ? <ArrowUp className="h-3 w-3 mr-0.5" />
+                      : <ArrowDown className="h-3 w-3 mr-0.5" />}
+                  {m.roundish ? Math.abs(Math.round(m.trend)) : Math.abs(m.trend).toFixed(1)}
+                </span>
               </div>
               <p className="text-xs text-muted-foreground">
-                {m.key === "csat" ? (
-                  <>
-                    Sin media entre proyectos mientras no haya medición. Meta: {m.target} {m.unit} cuando la app esté en uso real y se pueda
-                    medir CSAT de forma formal.
-                  </>
-                ) : (
-                  <>Media entre Leoneta y Changarritos · Meta del proyecto: {m.target} {m.unit}</>
-                )}
+                Promedio de los dos productos · Meta que nos pusimos: {formatTargetLine(m)}
               </p>
             </CardContent>
           </Card>

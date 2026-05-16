@@ -1,6 +1,5 @@
-import { BarChart3, GitCompare, FileText, Users, LayoutDashboard, ListTodo } from "lucide-react";
+import { BarChart3, GitCompare, Users, LayoutDashboard, ListTodo } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
@@ -10,7 +9,6 @@ const items = [
   { title: "Resumen", url: "/", icon: LayoutDashboard },
   { title: "Métricas", url: "/metrics", icon: BarChart3 },
   { title: "Comparativo", url: "/comparative", icon: GitCompare },
-  { title: "Análisis del proyecto", url: "/analysis", icon: FileText },
   { title: "Backlog", url: "/backlog", icon: ListTodo },
   { title: "Estado del equipo", url: "/conclusions", icon: Users },
 ];
@@ -18,8 +16,6 @@ const items = [
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
-
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>

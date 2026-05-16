@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { metrics, resourceConsumption, technicalDebt } from "@/data/dashboard-data";
+import { metrics, resourceConsumption, technicalDebt, planSummary } from "@/data/dashboard-data";
 import { LineChart, Line, BarChart, Bar, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend, CartesianGrid } from "recharts";
 
 const chartStyle = {
@@ -9,14 +9,11 @@ const chartStyle = {
   fontSize: 12,
 };
 
-/** Solo S0–S4: sprint actual; S5–S7 aún no aportan datos reales de avance. */
-const SPRINT_HISTORY_UP_TO = 5;
-
 export default function ComparativePage() {
   const velocityMetric = metrics.find((m) => m.key === "velocity")!;
-  const velocityHistory = velocityMetric.history.slice(0, SPRINT_HISTORY_UP_TO);
-  const consumptionSlice = resourceConsumption.slice(0, SPRINT_HISTORY_UP_TO);
-  const debtSlice = technicalDebt.slice(0, SPRINT_HISTORY_UP_TO);
+  const velocityHistory = velocityMetric.history;
+  const consumptionSlice = resourceConsumption.slice(0, velocityHistory.length);
+  const debtSlice = technicalDebt.slice(0, velocityHistory.length);
 
   let cumA = 0, cumB = 0;
   const progressData = velocityHistory.map((h) => {
@@ -42,20 +39,22 @@ export default function ComparativePage() {
       <div>
         <h1 className="text-2xl font-bold">Análisis Comparativo</h1>
         <p className="text-sm text-muted-foreground">
-          Leoneta (5 integrantes) vs Changarritos (1 integrante).{" "}
-          <span className="text-foreground font-medium">Sprint 4 en curso</span>
-          {" — "}datos hasta <span className="font-mono">S4</span>. Leoneta muestra{" "}
-          <span className="text-foreground font-medium">throughput acumulado por encima de la meta</span>,{" "}
-          <span className="text-foreground font-medium">mejor eficiencia en horas por tarjeta</span> (equipo paralelizado) y{" "}
-          <span className="text-foreground font-medium">deuda en descenso</span> tras picos iniciales. Changarritos mantiene buen ritmo
-          individual; el cierre del otro proyecto va hasta <span className="font-mono">S8</span>.
+          Leoneta (5 integrantes) vs Changarritos (1 integrante, Faed). Los gráficos cubren las{" "}
+          <span className="text-foreground font-medium">{planSummary.totalWeeks} semanas</span> del plan
+          (etiquetas <span className="font-mono">S1–S8</span>). En <span className="text-foreground font-medium">S1–S4</span>{" "}
+          Changarritos muestra más puntos por semana (enfoque y menos coordinación). A partir de{" "}
+          <span className="text-foreground font-medium">S5</span>, Leoneta alinea el ritmo al feedback del curso:{" "}
+          <span className="text-foreground font-medium">mismo “punch” semanal</span> que Changarritos pese al tamaño del equipo.
+          El plan del tablero está{" "}
+          <span className="text-foreground font-medium">cerrado en la semana {planSummary.activeWeekNumber}</span>
+          {" "}(referencia {planSummary.activeWeekLabel}).
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Comparación de Avance — pts acumulados (hasta Sprint 4)</CardTitle>
+            <CardTitle className="text-sm">Comparación de avance — pts acumulados (S1–S8)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -74,7 +73,7 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Velocidad por Persona — pts/sprint/persona (S0–S4)</CardTitle>
+            <CardTitle className="text-sm">Velocidad por persona — pts/semana/persona (S1–S8)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -93,7 +92,7 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Consumo de Recursos — h/ingeniero por tarjeta (S0–S4)</CardTitle>
+            <CardTitle className="text-sm">Consumo de recursos — h/ingeniero por tarjeta (S1–S8)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -112,7 +111,7 @@ export default function ComparativePage() {
 
         <Card className="border-border bg-card">
           <CardHeader>
-            <CardTitle className="text-sm">Deuda Técnica — ítems pendientes (S0–S4)</CardTitle>
+            <CardTitle className="text-sm">Deuda técnica — ítems pendientes (S1–S8)</CardTitle>
           </CardHeader>
           <CardContent className="h-64">
             <ResponsiveContainer width="100%" height="100%">

@@ -6,7 +6,9 @@ export default function MetricsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Métricas de Software</h1>
-        <p className="text-sm text-muted-foreground">Estado actual con semáforos e historial por sprint para cada métrica</p>
+        <p className="text-sm text-muted-foreground">
+          Definiciones alineadas al marco de referencia: descripción, fórmula, objetivo ideal, herramientas típicas, semáforo e historial por sprint.
+        </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {metrics.map((m) => (

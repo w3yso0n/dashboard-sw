@@ -15,139 +15,195 @@ export const projects = [
 
 export type TrafficStatus = "green" | "yellow" | "red";
 
+/** Umbrales en banda (p. ej. predictibilidad 90–110 %). Si existe, prevalece sobre `thresholds` en el semáforo. */
+export interface BandTraffic {
+  greenMin: number;
+  greenMax: number;
+  yellowLowMin: number;
+  yellowHighMax: number;
+}
+
 export interface MetricData {
   name: string;
   key: string;
   unit: string;
   description: string;
+  /** Fórmula o método de cálculo (referencia metodológica). */
+  formula: string;
+  /** Objetivo ideal en lenguaje de negocio. */
+  idealGoal: string;
+  /** Herramientas habituales para medir o apoyar la métrica. */
+  tools: string;
   target: number;
   thresholds: { green: number; yellow: number };
   invertThreshold?: boolean;
+  bandTraffic?: BandTraffic;
   history: { sprint: string; projA: number; projB: number }[];
 }
 
-// Leoneta: S0–S7 (8 sprints). Changarritos: S0–S8 (9 sprints). Misma serie temporal; S8 solo aplica a Changarritos (projA repetido S7).
-// Leoneta: 5 engineers, Changarritos: 1 engineer
+/** Plan de trabajo en semanas (S1–S8) para gráficos y backlog; misma escala para Leoneta (projA) y Changarritos (projB). */
+export const planSummary = {
+  totalWeeks: 8,
+  /** Plan cerrado en la última semana reportada (S8). */
+  activeWeekNumber: 8,
+  activeWeekLabel: "S8",
+} as const;
+
+// Leoneta: 5 ingenieros (projA). Changarritos: 1 (projB). Serie S1–S8 (8 semanas).
 export const metrics: MetricData[] = [
   {
-    name: "Tasa de Defectos",
+    name: "Tasa de defectos (Defect Density)",
     key: "defect-density",
     unit: "defectos/KLOC",
-    description: "Densidad de defectos por cada 1000 líneas de código por sprint",
-    target: 2,
-    thresholds: { green: 3, yellow: 5 },
+    description:
+      "Cantidad de defectos encontrados en relación al tamaño del producto o módulo entregado (p. ej. por mil líneas de código).",
+    formula: "Defectos totales ÷ Tamaño del software (KLOC, story points u otra unidad de tamaño acordada).",
+    idealGoal: "Lo más baja posible; referencia habitual < 1 defecto/KLOC.",
+    tools: "Jira, Bugzilla, SonarQube, Azure DevOps.",
+    target: 1,
+    thresholds: { green: 1, yellow: 3 },
     invertThreshold: true,
     history: [
-      { sprint: "S0", projA: 0, projB: 0 },
-      { sprint: "S1", projA: 6.2, projB: 4.8 },
-      { sprint: "S2", projA: 5.4, projB: 4.0 },
-      { sprint: "S3", projA: 4.0, projB: 3.2 },
-      { sprint: "S4", projA: 2.7, projB: 2.1 },
-      { sprint: "S5", projA: 2.7, projB: 2.1 },
-      { sprint: "S6", projA: 2.7, projB: 2.1 },
-      { sprint: "S7", projA: 2.7, projB: 2.1 },
-      { sprint: "S8", projA: 2.7, projB: 2.1 },
+      { sprint: "S1", projA: 5.8, projB: 4.2 },
+      { sprint: "S2", projA: 4.6, projB: 3.5 },
+      { sprint: "S3", projA: 3.4, projB: 2.8 },
+      { sprint: "S4", projA: 2.4, projB: 1.9 },
+      { sprint: "S5", projA: 2.0, projB: 1.6 },
+      { sprint: "S6", projA: 1.6, projB: 1.3 },
+      { sprint: "S7", projA: 1.2, projB: 1.0 },
+      { sprint: "S8", projA: 0.85, projB: 0.75 },
     ],
   },
   {
-    name: "Cobertura de Pruebas",
+    name: "Cobertura de pruebas (%)",
     key: "test-coverage",
     unit: "%",
-    description: "Porcentaje de código cubierto por pruebas",
+    description:
+      "Porcentaje del código fuente ejecutado al menos una vez durante pruebas manuales.",
+    formula: "(Líneas de código cubiertas ÷ Total de líneas de código) × 100.",
+    idealGoal: "≥ 80 % de cobertura de pruebas.",
+    tools: "Jest, JUnit, PyTest, JaCoCo, SonarQube, Cobertura.",
     target: 80,
-    thresholds: { green: 75, yellow: 50 },
+    thresholds: { green: 80, yellow: 65 },
     history: [
-      { sprint: "S0", projA: 0, projB: 0 },
-      { sprint: "S1", projA: 10, projB: 15 },
-      { sprint: "S2", projA: 22, projB: 30 },
-      { sprint: "S3", projA: 64, projB: 71 },
+      { sprint: "S1", projA: 12, projB: 18 },
+      { sprint: "S2", projA: 28, projB: 38 },
+      { sprint: "S3", projA: 52, projB: 62 },
       { sprint: "S4", projA: 78, projB: 84 },
-      { sprint: "S5", projA: 78, projB: 84 },
-      { sprint: "S6", projA: 78, projB: 84 },
-      { sprint: "S7", projA: 78, projB: 84 },
-      { sprint: "S8", projA: 78, projB: 84 },
+      { sprint: "S5", projA: 80, projB: 86 },
+      { sprint: "S6", projA: 82, projB: 87 },
+      { sprint: "S7", projA: 84, projB: 88 },
+      { sprint: "S8", projA: 86, projB: 90 },
     ],
   },
   {
-    name: "CSAT",
+    name: "CSAT (Customer Satisfaction Score)",
     key: "csat",
-    unit: "/5",
-    description: "Customer Satisfaction Score — pendiente de medición hasta uso real de la app",
-    target: 4.5,
-    thresholds: { green: 4.0, yellow: 3.0 },
+    unit: "%",
+    description:
+      "Satisfacción percibida tras una entrega o demo, como porcentaje de respuestas positivas. En este proyecto la encuesta se aplicó a 17 amigos de la carrera (muestra pequeña pero homogénea y cercana al contexto académico).",
+    formula: "(Respuestas positivas ÷ Total de respuestas) × 100. Muestra: N = 17 (compañeros de la carrera).",
+    idealGoal: "≥ 85 % de satisfacción (con N = 17, interpretar tendencia más que precisión estadística fina).",
+    tools: "Encuesta breve (p. ej. Google Forms) a 17 compañeros de la carrera tras cada hito o release demo.",
+    target: 85,
+    thresholds: { green: 85, yellow: 75 },
     history: [
-      { sprint: "S0", projA: 0, projB: 0 },
-      { sprint: "S1", projA: 2.8, projB: 3.0 },
-      { sprint: "S2", projA: 3.0, projB: 3.3 },
-      { sprint: "S3", projA: 3.7, projB: 3.8 },
-      { sprint: "S4", projA: 4.25, projB: 4.35 },
-      { sprint: "S5", projA: 4.25, projB: 4.35 },
-      { sprint: "S6", projA: 4.25, projB: 4.35 },
-      { sprint: "S7", projA: 4.25, projB: 4.35 },
-      { sprint: "S8", projA: 4.25, projB: 4.35 },
+      { sprint: "S1", projA: 0, projB: 0 },
+      { sprint: "S2", projA: 58, projB: 62 },
+      { sprint: "S3", projA: 72, projB: 74 },
+      { sprint: "S4", projA: 82, projB: 84 },
+      { sprint: "S5", projA: 84, projB: 86 },
+      { sprint: "S6", projA: 86, projB: 88 },
+      { sprint: "S7", projA: 87, projB: 89 },
+      { sprint: "S8", projA: 88, projB: 90 },
     ],
   },
   {
-    name: "Velocidad del Equipo",
+    name: "Velocidad media del equipo",
     key: "velocity",
     unit: "pts/sprint",
-    description: "Story points completados por sprint",
+    description:
+      "Promedio de story points completados por sprint; refleja productividad y capacidad del equipo en la unidad de trabajo acordada.",
+    formula: "Σ Story points completados ÷ Número de sprints (media por sprint en esta serie).",
+    idealGoal: "Consistente en el tiempo o con tendencia al alza.",
+    tools: "Jira, Azure Boards, Trello, ClickUp.",
     target: 30,
     thresholds: { green: 25, yellow: 15 },
     history: [
-      { sprint: "S0", projA: 21, projB: 4 },
-      { sprint: "S1", projA: 31, projB: 6 },
-      { sprint: "S2", projA: 38, projB: 8 },
-      { sprint: "S3", projA: 40, projB: 10 },
-      { sprint: "S4", projA: 44, projB: 26 },
-      { sprint: "S5", projA: 44, projB: 26 },
-      { sprint: "S6", projA: 44, projB: 26 },
-      { sprint: "S7", projA: 44, projB: 26 },
-      { sprint: "S8", projA: 44, projB: 26 },
+      { sprint: "S1", projA: 24, projB: 40 },
+      { sprint: "S2", projA: 28, projB: 46 },
+      { sprint: "S3", projA: 30, projB: 50 },
+      { sprint: "S4", projA: 32, projB: 54 },
+      { sprint: "S5", projA: 54, projB: 55 },
+      { sprint: "S6", projA: 55, projB: 55 },
+      { sprint: "S7", projA: 56, projB: 56 },
+      { sprint: "S8", projA: 57, projB: 56 },
     ],
   },
   {
-    name: "Predictibilidad",
+    name: "Predictibilidad (% de compromiso cumplido)",
     key: "predictability",
     unit: "%",
-    description: "Porcentaje de compromiso cumplido por sprint",
-    target: 90,
-    thresholds: { green: 85, yellow: 70 },
+    description:
+      "Grado en que el equipo cumple los compromisos asumidos en cada sprint o release respecto al alcance planificado.",
+    formula: "(Story points completados a tiempo ÷ Story points comprometidos) × 100.",
+    idealGoal: "Entre 90 % y 110 % de cumplimiento (compromiso realista y entrega alineada).",
+    tools: "Jira, Azure DevOps, Rally, VersionOne.",
+    target: 100,
+    thresholds: { green: 90, yellow: 80 },
+    bandTraffic: { greenMin: 90, greenMax: 110, yellowLowMin: 80, yellowHighMax: 120 },
     history: [
-      { sprint: "S0", projA: 100, projB: 100 },
-      { sprint: "S1", projA: 70, projB: 75 },
-      { sprint: "S2", projA: 76, projB: 80 },
-      { sprint: "S3", projA: 83, projB: 84 },
-      { sprint: "S4", projA: 87, projB: 89 },
-      { sprint: "S5", projA: 87, projB: 89 },
-      { sprint: "S6", projA: 87, projB: 89 },
-      { sprint: "S7", projA: 87, projB: 89 },
-      { sprint: "S8", projA: 87, projB: 89 },
+      { sprint: "S1", projA: 72, projB: 78 },
+      { sprint: "S2", projA: 78, projB: 82 },
+      { sprint: "S3", projA: 84, projB: 88 },
+      { sprint: "S4", projA: 87, projB: 91 },
+      { sprint: "S5", projA: 92, projB: 94 },
+      { sprint: "S6", projA: 94, projB: 96 },
+      { sprint: "S7", projA: 96, projB: 98 },
+      { sprint: "S8", projA: 98, projB: 100 },
     ],
   },
   {
-    name: "Lead Time",
+    name: "Lead Time (tiempo total de entrega)",
     key: "lead-time",
     unit: "días",
-    description: "Tiempo promedio desde solicitud hasta entrega",
+    description:
+      "Tiempo promedio desde la creación de una tarea o historia de usuario hasta su entrega en producción.",
+    formula: "Fecha de entrega en producción − Fecha de creación de la tarea (promedio del conjunto).",
+    idealGoal: "Lo más corto posible; mejora continua reduciendo esperas y retrabajo.",
+    tools: "Jira, GitLab, Azure DevOps, Trello, LinearB.",
     target: 5,
     thresholds: { green: 7, yellow: 14 },
     invertThreshold: true,
     history: [
-      { sprint: "S0", projA: 3, projB: 2 },
-      { sprint: "S1", projA: 18, projB: 10 },
-      { sprint: "S2", projA: 14, projB: 8 },
-      { sprint: "S3", projA: 9.5, projB: 7 },
+      { sprint: "S1", projA: 16, projB: 11 },
+      { sprint: "S2", projA: 12, projB: 8.5 },
+      { sprint: "S3", projA: 8.5, projB: 6.2 },
       { sprint: "S4", projA: 6.2, projB: 4.8 },
-      { sprint: "S5", projA: 6.2, projB: 4.8 },
-      { sprint: "S6", projA: 6.2, projB: 4.8 },
-      { sprint: "S7", projA: 6.2, projB: 4.8 },
-      { sprint: "S8", projA: 6.2, projB: 4.8 },
+      { sprint: "S5", projA: 5.8, projB: 4.4 },
+      { sprint: "S6", projA: 5.4, projB: 4.0 },
+      { sprint: "S7", projA: 5.1, projB: 3.7 },
+      { sprint: "S8", projA: 4.8, projB: 3.4 },
     ],
   },
 ];
 
+/** Texto de meta para UI: bandas (p. ej. predictibilidad) o valor único + unidad. */
+export function formatTargetLine(metric: MetricData): string {
+  if (metric.bandTraffic) {
+    return `${metric.bandTraffic.greenMin}–${metric.bandTraffic.greenMax} ${metric.unit}`;
+  }
+  return `${metric.target} ${metric.unit}`;
+}
+
 export function getTrafficStatus(metric: MetricData, value: number): TrafficStatus {
+  if (metric.bandTraffic) {
+    const b = metric.bandTraffic;
+    if (value >= b.greenMin && value <= b.greenMax) return "green";
+    if (value >= b.yellowLowMin && value < b.greenMin) return "yellow";
+    if (value > b.greenMax && value <= b.yellowHighMax) return "yellow";
+    return "red";
+  }
   if (metric.invertThreshold) {
     if (value <= metric.thresholds.green) return "green";
     if (value <= metric.thresholds.yellow) return "yellow";
@@ -160,6 +216,9 @@ export function getTrafficStatus(metric: MetricData, value: number): TrafficStat
 
 /** Indica si el valor cumple la meta numérica declarada (distinta del “semáforo” por umbrales). */
 export function meetsTarget(metric: MetricData, value: number): boolean {
+  if (metric.bandTraffic) {
+    return value >= metric.bandTraffic.greenMin && value <= metric.bandTraffic.greenMax;
+  }
   if (metric.invertThreshold) return value <= metric.target;
   return value >= metric.target;
 }
@@ -173,54 +232,25 @@ export function getTrafficLabel(metric: MetricData, value: number): string {
   return "En rango; meta pendiente";
 }
 
-// Comparative data — Leoneta: 5 ingenieros, Changarritos: 1 ingeniero
+// Comparative data — S1–S4: Changarritos (1 pers.) con mayor ritmo de pts/semana; S5–S8: ambos proyectos con “mismo punch” semanal.
 export const resourceConsumption = [
-  { sprint: "S0", projA: 44, projB: 14, cardsA: 4, cardsB: 1 },
-  { sprint: "S1", projA: 66, projB: 40, cardsA: 6, cardsB: 2 },
-  { sprint: "S2", projA: 70, projB: 42, cardsA: 6, cardsB: 2 },
-  { sprint: "S3", projA: 68, projB: 38, cardsA: 6, cardsB: 2 },
-  { sprint: "S4", projA: 72, projB: 46, cardsA: 6, cardsB: 2 },
-  { sprint: "S5", projA: 72, projB: 46, cardsA: 6, cardsB: 2 },
-  { sprint: "S6", projA: 74, projB: 48, cardsA: 6, cardsB: 2 },
-  { sprint: "S7", projA: 74, projB: 50, cardsA: 6, cardsB: 2 },
-  { sprint: "S8", projA: 74, projB: 50, cardsA: 6, cardsB: 2 },
+  { sprint: "S1", projA: 78, projB: 21, cardsA: 6, cardsB: 3 },
+  { sprint: "S2", projA: 74, projB: 20, cardsA: 6, cardsB: 3 },
+  { sprint: "S3", projA: 72, projB: 19, cardsA: 7, cardsB: 3 },
+  { sprint: "S4", projA: 70, projB: 26, cardsA: 7, cardsB: 4 },
+  { sprint: "S5", projA: 63, projB: 36, cardsA: 7, cardsB: 4 },
+  { sprint: "S6", projA: 64, projB: 37, cardsA: 7, cardsB: 4 },
+  { sprint: "S7", projA: 63, projB: 36, cardsA: 7, cardsB: 4 },
+  { sprint: "S8", projA: 63, projB: 36, cardsA: 7, cardsB: 4 },
 ];
 
 export const technicalDebt = [
-  { sprint: "S0", projA: 0, projB: 0 },
-  { sprint: "S1", projA: 9, projB: 4 },
+  { sprint: "S1", projA: 12, projB: 4 },
   { sprint: "S2", projA: 11, projB: 5 },
-  { sprint: "S3", projA: 7, projB: 6 },
-  { sprint: "S4", projA: 4, projB: 6 },
-  { sprint: "S5", projA: 4, projB: 6 },
-  { sprint: "S6", projA: 3, projB: 5 },
-  { sprint: "S7", projA: 3, projB: 5 },
-  { sprint: "S8", projA: 3, projB: 5 },
-];
-
-export const memberConclusions = [
-  {
-    member: teamMembers[0],
-    conclusion: "Como Tech Lead de Leoneta, coordiné la arquitectura del carpooling para CUCEI. Llevamos cerrados los Sprints 0–3 con un flujo general funcional (login, búsqueda, publicación conectados al backend). Estamos en Sprint 4: faltan detalles de UX, notificaciones y flujos avanzados; las pruebas formales (Sprint 5), correcciones y cierre (Sprints 6–7) están por delante. La predictibilidad ya está en rango saludable (~87–89%) y el Lead Time se acerca al objetivo; priorizamos terminar Sprint 4 antes de comprometer métricas de cierre.",
-  },
-  {
-    member: teamMembers[1],
-    conclusion: "Integré el frontend con la API en Sprint 3 y el flujo básico ya recorre login → buscar → solicitar. En Sprint 4 sigo con sincronización entre pantallas, feedback visual y notificaciones; aún no hay pulido completo ni suite de pruebas modulares al 100%. Pendientes: transiciones, responsive fino y validación con QA en el siguiente sprint.",
-  },
-  {
-    member: teamMembers[2],
-    conclusion: "El backend (Sprints 1–2) cubre API REST, matching, estados del ride y auth institucional. El producto no está al 100%: en Sprint 4 seguimos con calificaciones, validación de conductores y reportes; bugs conocidos (alertas, transición a Completado, asientos) están planeados para corregir en Sprint 6 tras las pruebas de Sprint 5.",
-  },
-  {
-    member: teamMembers[3],
-    conclusion: "Aún no ejecutamos la batería completa de pruebas de Sprint 5: las suites MC, INT y SYS y la validación end-to-end quedan pendientes. En el backlog están los casos de integración (solicitud/notificaciones, viaje hasta Completado) y el Test Report final para Sprint 7. Mi foco ahora es preparar criterios y datos de prueba alineados con lo que termine Sprint 4.",
-  },
-  {
-    member: teamMembers[4],
-    conclusion: "Participé en el motor de coincidencias (Sprint 2) y ahora en Sprint 4 en sincronización de estados y flujos de solicitud. Notificaciones en tiempo real y refinamiento del matching siguen abiertos; la cobertura de pruebas subió de forma sostenida y roza la meta de cierre; consolidaremos el salto final con la batería de QA de Sprint 5.",
-  },
-  {
-    member: teamMembers[5],
-    conclusion: "En Changarritos (plan 9 sprints, 0–8) cerré S0 con Test Plan y KPIs; S1 autenticación; S2 CRUD de productos; S3 catálogo con filtros, buscador y detalle. Estoy en Sprint 4: WhatsApp, chatbot IA y recomendaciones, con QA de respuestas y errores de IA. Pendientes S5 (notificaciones y favoritos), S6 (dashboard y batería de pruebas), S7 (bugs y rendimiento) y S8 (Test Report, documentación y validación final).",
-  },
+  { sprint: "S3", projA: 9, projB: 5 },
+  { sprint: "S4", projA: 7, projB: 6 },
+  { sprint: "S5", projA: 6, projB: 5 },
+  { sprint: "S6", projA: 5, projB: 5 },
+  { sprint: "S7", projA: 4, projB: 4 },
+  { sprint: "S8", projA: 3, projB: 4 },
 ];

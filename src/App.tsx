@@ -8,7 +8,6 @@ import { AppSidebar } from "@/components/AppSidebar";
 import Index from "./pages/Index";
 import MetricsPage from "./pages/MetricsPage";
 import ComparativePage from "./pages/ComparativePage";
-import AnalysisPage from "./pages/AnalysisPage";
 import ConclusionsPage from "./pages/ConclusionsPage";
 import BacklogPage from "./pages/BacklogPage";
 import NotFound from "./pages/NotFound";
@@ -33,7 +32,6 @@ const App = () => (
                   <Route path="/" element={<Index />} />
                   <Route path="/metrics" element={<MetricsPage />} />
                   <Route path="/comparative" element={<ComparativePage />} />
-                  <Route path="/analysis" element={<AnalysisPage />} />
                   <Route path="/conclusions" element={<ConclusionsPage />} />
                   <Route path="/backlog" element={<BacklogPage />} />
                   <Route path="*" element={<NotFound />} />
