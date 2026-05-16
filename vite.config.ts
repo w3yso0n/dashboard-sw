@@ -4,7 +4,10 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
+// base obligatorio para GitHub Pages: el sitio vive en /dashboard-sw/ (nombre del repo).
+// En dev, abre http://localhost:8080/dashboard-sw/ (Vite respeta `base`).
 export default defineConfig(({ mode }) => ({
+  base: "/dashboard-sw/",
   server: {
     host: "::",
     port: 8080,
